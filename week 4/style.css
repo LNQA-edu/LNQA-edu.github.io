@@ -1,0 +1,33 @@
+body {
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+p {
+  width: 400px;
+  background-color: bisque;
+  border: 3px dotted red;
+  border-radius: 20px;
+  height: 200px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.vcenter {
+  line-height: 100px;
+}
+span {
+  color: royalblue;
+}
+ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
