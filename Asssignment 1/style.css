@@ -18,31 +18,25 @@ h1 {
   font-weight: 400;
   font-style: normal;
   font-size: 3rem;
-  color: #6d1212;
 }
 
 .mjsport {
-display: block;
-block-size: 10px 20px;
-background-color: #6d1212;
-color: white
+  display: block; /* Makes it a block element for centering */
+  width: 200px; /* Adjust width as needed */
+  margin: 0 auto; /* Centers the button box horizontally */
+  padding: 10px 20px; /* Adds space inside the button */
+  text-align: center; /* Centers the text inside the button */
+  text-decoration: none; /* Removes underline from link */
+  background-color: #421f0e; /* Button background color */
+  color: white; /* Text color */
+  border: none; /* Removes border */
+  border-radius: 5px; /* Rounds corners */
+  font-size: 16px; /* Text size */
 }
 
 h2 {
   font-size: 1.5rem;
   font-style: bold;
-}
-
-h3 {
- 
-}
-
-p {
-
-}
-
-.subtext {
-
 }
 
 /*.navigation {
