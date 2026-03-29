@@ -1,1 +1,14 @@
-<h1> style="color:red" </h1>
+.stars input {
+  display: none;
+}
+
+.stars label {
+  color: grey;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* turn gold when selected */
+.stars input:checked ~ label {
+  color: gold;
+}
