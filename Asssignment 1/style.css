@@ -1,4 +1,72 @@
-.stars input {
+body {
+  background-color: #f6f2d8;
+  font-family: "Alata", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #6d1212;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+}
+
+h1 {
+  font-family: "Caveat Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  color: #6d1212;
+}
+
+.mjsport {
+  display: block;
+  padding: 10px 20px;
+  background-color: #421f0e;
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-style: bold;
+}
+
+h3 {
+  display: block;
+  padding: 8px 30px;
+  background-color: #713f26;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+}
+
+p {
+  display: block;
+  padding: 8px 30px;
+  background-color: white;
+  border-radius: 10px;
+  border: 3px dashed #713f26;
+  color: #6d1212;
+  text-decoration: none;
+}
+
+.subtext {
+}
+
+/*.navigation {
+  display: flex;
+}
+nav {
+  position: sticky;
+  top: 0;
+  height: 10vh;
+}*/
+
+/*.stars input {
   display: none;
 }
 
@@ -8,7 +76,6 @@
   cursor: pointer;
 }
 
-/* turn gold when selected */
 .stars input:checked ~ label {
   color: gold;
-}
+} */
