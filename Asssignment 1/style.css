@@ -22,12 +22,10 @@ h1 {
 }
 
 .mjsport {
-  display: block;
-  padding: 10px 20px;
-  background-color: #421f0e;
-  border-radius: 15px;
-  color: white;
-  text-decoration: none;
+display: block;
+block-size: 10px 20px;
+background-color: #6d1212;
+color: white
 }
 
 h2 {
@@ -36,25 +34,15 @@ h2 {
 }
 
 h3 {
-  display: block;
-  padding: 8px 30px;
-  background-color: #713f26;
-  border-radius: 30px;
-  color: white;
-  text-decoration: none;
+ 
 }
 
 p {
-  display: block;
-  padding: 8px 30px;
-  background-color: white;
-  border-radius: 10px;
-  border: 3px dashed #713f26;
-  color: #6d1212;
-  text-decoration: none;
+
 }
 
 .subtext {
+
 }
 
 /*.navigation {
