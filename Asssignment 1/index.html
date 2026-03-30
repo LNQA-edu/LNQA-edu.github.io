@@ -17,18 +17,26 @@
     <!-- code lines for importing fonts from google fonts -->
   </head>
   <body>
+    <img class="decor-1" src="headbanner.png" />
+
     <header>
-      <h1>Interactive Experience Research</h1>
-      <p class="subtext">
-        This website explores the interactivity and design intentions behind Min
-        Jea Seo's portfolio.
-      </p>
-      <a class="mjsport" href="https://minjeaseo.com" target="_blank"
-        >Visit Min's website!
-      </a>
+      <!-- divide the header section to style texts centered in style.css -->
+      <div class="decorcontent-1">
+        <!-- divided and classed again so this section can be put under img headbanner.png -->
+        <h1>INTERACTIVE EXPERIENCE RESEARCH</h1>
+        <p class="description">
+          <!-- description class: to style the text differently from main content -->
+          This website explores the interactivity and design intentions behind
+          Min Jea Seo's portfolio.
+        </p>
+        <a class="mjsport" href="https://minjeaseo.com" target="_blank"
+          >Visit Min's website!
+          <!-- mjsport class: to style link to min jea seo's website -->
+        </a>
+      </div>
 
       <h2>Questions & Answers</h2>
-      <p class="subtext">
+      <p class="description">
         This section navigates prompts related to the interactive experience of
         Min Jea Seo's page.
       </p>
@@ -36,8 +44,8 @@
 
     <div>
       <nav>
-        <!-- dividing the navigation section, which is to be styled differently -->
-        <p>Nav.</p>
+        <!-- dividing the navigation section, which is to be styled differently. Using the introduced ul tag would not optimize the code lines however.-->
+        <p>Nav</p>
         <a href="#q1">01</a>
         <a href="#q2">02</a>
         <a href="#q3">03</a>
@@ -51,11 +59,17 @@
         <a href="#q11">11</a>
         <a href="#q12">12</a>
         <a href="#q13">13</a>
+        <!-- the # are tied directly to id (explained below)to create follow links and q1->q13 are naming conventions -->
       </nav>
 
       <main>
         <!-- signal primary content of the webpage, which is the prompts answering section -->
         <section id="q1">
+          <!-- 
+          section: for grouping related content
+          id: for creating follow links.
+          q1-q13: naming conventions.
+            -->
           <h3>
             01. What was the first thing you paid attention to when interacting
             with the experience?
@@ -264,6 +278,7 @@
      - W3Schools.
     - Claude AI.
     - VS Code live comments.
+    disclaimer: all decorative elements and structural layout are created by me.
     -->
   </body>
 </html>
