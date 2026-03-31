@@ -16,6 +16,10 @@ header {
   text-align: center;
 }
 
+.decor {
+  margin: 0 auto;
+}
+
 .decorcontent-1 {
   position: relative;
   top: -570px;
@@ -49,7 +53,7 @@ h3 {
 
 p {
   background-color: white;
-  border: 3px dotted #6d1212;
+  border: 3px dashed #6d1212;
   border-radius: 10px;
   padding: 10px 20px;
   margin: 0 auto;
@@ -85,6 +89,11 @@ nav {
   position: sticky;
   top: 0;
   height: 10vh;
+}
+
+img {
+  margin-bottom: 40px;
+  margin-top: 10px;
 }
 
 /*footer {
