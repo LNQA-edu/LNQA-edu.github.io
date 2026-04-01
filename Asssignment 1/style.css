@@ -8,9 +8,9 @@ body {
   font-size: 1rem;
   display: flex;
   flex-direction: column;
+  /*makes the body a flex container with child elements stacked vertically*/
   align-items: center;
-  justify-content: center;
-}
+  /*child elements are centered horizontally in the body*/
 
 header {
   text-align: center;
@@ -18,10 +18,12 @@ header {
 
 .decor {
   margin: 0 auto;
+  /*as this image is a decorative element, putting margin 0 will not affect the layout of the page, and auto will center it */
 }
 
 .decorcontent-1 {
   position: relative;
+  /* the hero section is divided for the position to be styled absolutely with the decorative image */
   top: -570px;
 }
 
@@ -54,6 +56,7 @@ h3 {
 p {
   background-color: white;
   border: 3px dashed #6d1212;
+  /*border are dashed to fit the handmade style of the web*/
   border-radius: 10px;
   padding: 10px 20px;
   margin: 0 auto;
@@ -61,6 +64,7 @@ p {
 }
 
 .description {
+  /*this subclass is mostly for making text color fainter and removing the border to distinct from main content, as both have to be the same font size for readability */
   color: #b27b5f;
   border: none;
   background-color: transparent;
@@ -82,26 +86,37 @@ p {
   font-size: 1rem;
 }
 
-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  position: sticky;
-  top: 0;
-  height: 10vh;
-}
-
 img {
   margin-bottom: 40px;
   margin-top: 10px;
 }
 
-/*footer {
+footer {
+  background-color: #f5dd8d;
+  padding: 20px ;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}*/
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+}
 
-/*.stars input {
+h4 {
+  color: #421f0e; 
+}
+
+.footer-contact p {
+  color: white; 
+  background: none;
+  border: none;
+}
+
+.footer-review p {
+  color: white;
+  background: none;
+  border: none;
+}
+
+.stars input {
   display: none;
 }
 
@@ -112,5 +127,5 @@ img {
 }
 
 .stars input:checked ~ label {
-  color: gold;
-} */
+  color: red;
+}
