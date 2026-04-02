@@ -95,37 +95,33 @@ footer {
   background-color: #f5dd8d;
   padding: 20px ;
   width: 100%;
+  display: flex;
 
-  display: flex;/* display: grid; */
-  /* grid-template-columns: repeat(2, 1fr); */
-  align-items: center;
-  justify-content: center;
+}
+
+footer p {
+  background: transparent;
+  border: none;
+  color: #b27b5f;
 }
 
 h4 {
-  color: #421f0e; 
+  color: #6d1212; 
 }
 
-.footer-contact p {
-  color: white; 
-  background: none;
-  border: none;
-  /* /*margin padding  */
-  margin 
+footer > * {
+  max-width: 640px;
+  margin: 0 auto 10px;
 }
 
-.footer-review p {
-  color: white;
-  background: none;
-  border: none;
-}
+.stars { flex-direction: row; }
 
 .stars input {
   display: none;
 }
 
 .stars label {
-  color: grey;
+  color: rgb(189, 189, 189);
   font-size: 2rem;
   cursor: pointer;
 }
@@ -133,3 +129,4 @@ h4 {
 .stars input:checked ~ label {
   color: red;
 }
+/* I am sad to say this section is unfinished, despite my ongoing efforts. I would like to preserve it as visual experimentations. */
