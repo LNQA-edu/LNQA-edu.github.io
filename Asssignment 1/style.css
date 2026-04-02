@@ -94,8 +94,10 @@ img {
 footer {
   background-color: #f5dd8d;
   padding: 20px ;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+
+  display: flex;/* display: grid; */
+  /* grid-template-columns: repeat(2, 1fr); */
   align-items: center;
   justify-content: center;
 }
