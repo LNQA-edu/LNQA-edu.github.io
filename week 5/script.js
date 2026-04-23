@@ -90,7 +90,7 @@ const students = ["alice", "bob", "carol", "deb", "elisa", "frank"];
 // console.log ("hello", students[3]);
 // doing like above and ur a stupid ahh
 console.log(students.length);
-for (let i = 0; i < students, length; i++) {
+for (let i = 0; i < students.length; i++) {
   // creating a loop
   console.log("hello", students[i]);
 }
