@@ -1,0 +1,14 @@
+.round {
+  border-radius: 50%;
+}
+
+img {
+  display: block;
+  margin: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: zoom-out;
+}
