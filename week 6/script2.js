@@ -62,3 +62,6 @@ function toggleMe() {
   myCat.classList.remove("round");
   myButton.textContent = "dont click meow!";
 }
+
+/* rock paper scissors game example: randomise toggles
+read the code line comments in canvas for more details. */
