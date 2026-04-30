@@ -26,20 +26,21 @@ console.log(subHead);
 but querySelector is more versatile.
 getElementById is faster but not a big deal for small projects.*/
 
-const courseName="Interactive Media";
-const courseId="OART1013";
-const header= document.querySelector("header");
+const courseName = "Interactive Media";
+const courseId = "OART1013";
+const header = document.querySelector("header");
 console.log(header);
 console.log(header.innerHTML);
-header.innerHTML += ' 
-// use backticks to write multi-line string and embed variables using ${variableName}
-<h3class="blue-color"> ${courseName} </h3>
-<p> ${courseId} </P> ';
+header.innerHTML += `
+<h3 class="blue-color"> ${courseName} </h3>
+<p> ${courseId} </p>
+`;
+//use backticks to write multi-line string and embed variables using $ + {variableName}
 
 const myCat = document.querySelector("#meow");
-console.log(myCat);  
+console.log(myCat);
 
-myButton =document.querySelector("#my-button");
+const myButton = document.querySelector("#my-button");
 console.log(myButton);
 myButton.addEventListener("click", toggleMe);
 myButton.addEventListener("mouseover", addMe);
@@ -48,13 +49,13 @@ myButton.addEventListener("mouseout", removeMe);
 function addMe() {
   myCat.classList.add("round");
   myButton.textContent = "click meow!";
-  body.style.backgroundColor = "pink";
+  document.body.style.backgroundColor = "pink";
 }
 
 function removeMe() {
   myCat.classList.remove("round");
   myButton.textContent = "dont click meow!";
-  body.style.backgroundColor = "lime";
+  document.body.style.backgroundColor = "lime";
 }
 // suggestions: for using to play audios?
 
