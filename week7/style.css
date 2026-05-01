@@ -1,0 +1,35 @@
+audio {
+  display: block;
+  margin-bottom: 20px;
+}
+/* make it a block element to */
+
+/* root: for custom properties but its different because it allows us to define reusable values throughout our stylesheet */
+:root {
+  --primary-color: #ff7f50;
+  --secondary-color: #7dded9;
+}
+/* ex: you want all your headers to have the same color
+h1, h2, h3 {
+  color: var(--primary-color);
+}
+*/
+
+button {
+  font-size: 1.3rem;
+  border-radius: 12px;
+  padding: 8px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  margin-right: 8px;
+}
+
+button:hover {
+  scale: 1.3;
+  background-color: aqua;
+}
+
+video {
+  width: 600px;
+  height: 400px;
+}
