@@ -1,41 +1,82 @@
+:root {
+  --primary-bg-color: #909fa7;
+  --text-color: #6c544f;
+  --nav-bg-color: #ffffff;
+  --nav-bg-gradient-color: #ffffff;
+  --nav-text-color: #6c544f;
+}
+
 body {
   font-family: "Mulish", sans-serif;
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
-}
-
-img {
-  margin: 0 auto;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-bg-color) 100%,
+    #71848f 50%,
+    rgba(255, 255, 255, 0)
+  );
+  color: var(--text-color);
 }
 
 nav {
-  color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: linear-gradient(
     to bottom,
-    #ffffff 30%,
-    rgba(255, 255, 255, 30%),
-    rgba(255, 255, 255, 10%)
+    var(--nav-bg-color) 40%,
+    rgba(255, 255, 255, 0)
   );
-  text-align: center;
-  padding: 10px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
+  gap: 40px; /* space between Home and About */
+  padding: 16px 0;
+  margin: 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+h1 {
+  position: relative;
+  text-align: left;
+  top: -600px;
+  margin: 200px;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  font-style: italic;
+}
+
+/* hero container — everything overlaps inside here */
+.hero {
+  position: relative;
+  width: 100%;
+}
+
+img {
+  width: 100%;
+  display: block;
 }
 
 footer {
   padding: 10px;
   background: linear-gradient(
     to top,
-    #ffffff 0%,
-    rgba(255, 255, 255, 30%),
-    rgba(255, 255, 255, 10%)
+    var(--nav-bg-color) 20%,
+    rgba(255, 255, 255, 0)
   );
-  color: black;
   text-align: center;
   padding: 10px;
 }
