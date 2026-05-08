@@ -105,14 +105,20 @@ and tomodachi life footage of miis passionately talking about femboy hunting.
 idk i hope the hackers at least put extentions on our assignments while they are at it.
 Also i wanna go to the beach. */
 
+/// progressbar logic
+
 const progressBar = document.querySelector("#progress-bar");
 console.log(progressBar);
 
 myVideo.addEventListener("timeupdate", updateProgress);
 
 function updateProgress() {
-  console.log(myVideo.currentTime);
-  let progress = Math.floor(myVideo.currentTime / myVideo.duration) * 100;
+  //   console.log(myVideo.currentTime);
+  let progress = (myVideo.currentTime / myVideo.duration) * 100;
+
+  // //   use Math.floor function to see the progress as numbers in the javascript console
+  //   let progress = Math.floor((myVideo.currentTime / myVideo.duration) * 100);
+
   console.log(progress);
   progressBar.style.width = progress + "%";
 }
