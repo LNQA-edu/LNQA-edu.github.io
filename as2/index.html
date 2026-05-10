@@ -24,22 +24,84 @@
       <nav>
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="#">Credits</a></li>
+          <!-- Credits: referencing used sources for the web -->
         </ul>
       </nav>
 
       <img src="web cover.png" alt="cover image" />
+      <!-- like assignment 1, i like having a single main visual for my work -->
 
       <h1>
         Heed the siren's call and<br />bask in the sweet songs of the sea.
+        <!-- introduction for the web, the writing meant to provoke curiousity. the <br> tag to create line breaks in single paragraphs < -->
       </h1>
     </div>
+
+    <h2>PLAYLIST</h2>
+    <h3>
+      Inspired by Odysseus's journey, the tale of a man who chose to savour the
+      demise.
+    </h3>
+    <!-- see bottom text for explanation on what <h3> is referencing. -->
+
+    <div id="playlist">
+      <!-- main section, given id ="playlist" for later working in js code page. -->
+      <div class="song-bar" onclick="toggleBar(this)">
+        <div class="song-info">
+          <p class="song-title">setsujoushort</p>
+        </div>
+        <button class="like-button" onclick="event.stopPropagation()">♡</button>
+        <!-- onclick="event.stopPropagation()": stop like button from behaving like the main song bar -->
+      </div>
+
+      <div class="song-bar" onclick="toggleBar(this)">
+        <div class="song-info">
+          <p class="song-title">Bishop</p>
+        </div>
+        <button class="like-button" onclick="event.stopPropagation()">♡</button>
+      </div>
+
+      <div class="song-bar" onclick="toggleBar(this)">
+        <div class="song-info">
+          <p class="song-title">Skimsnow</p>
+        </div>
+        <button class="like-button" onclick="event.stopPropagation()">♡</button>
+      </div>
+
+      <div class="song-bar" onclick="toggleBar(this)">
+        <div class="song-info">
+          <p class="song-title">Hatsukoi</p>
+        </div>
+        <button class="like-button" onclick="event.stopPropagation()">♡</button>
+      </div>
+
+      <div class="song-bar" onclick="toggleBar(this)">
+        <div class="song-info">
+          <p class="song-title">Negaiboshi</p>
+        </div>
+        <button class="like-button" onclick="event.stopPropagation()">♡</button>
+      </div>
+    </div>
+
     <footer>
-      <p>&copy; 2026 Media Player Website. All rights reserved.</p>
-      <a href="https://icons8.com/icon/59862/play">Play</a> icon by
-      <a href="https://icons8.com">Icons8</a>
-      <a href="https://icons8.com/icon/61012/pause">Pause</a> icon by
-      <a href="https://icons8.com">Icons8</a>
+      <!-- footer: credits and additional informations. -->
+      <p>
+        &copy; 2026 Media Player Website. All rights reserved. Icons by
+        <a href="https://icons8.com">Icons8.</a>
+        Songs by
+        <a href="https://2ram.com">RAMINE.</a>
+      </p>
+      <!-- i tried <br> tag on each sentence of the footer to section them out but that alignment is not visually pleasant to me. -->
     </footer>
   </body>
 </html>
+
+<!-- i wanna talk briefly about my design intentions. 
+i have been dying to visit the beaches in Melbourne for more than a few weeks now, it starts becoming all i could think of. 
+one could notice the pattern since all assignments i do since then are ocean-themed, haha. 
+although, i don't think there is any better way to start your projects than drawing inspirations from the things you love, like what i did in my assignment 1, for example. 
+i want to tie the intention of website creating for a relaxing music playlist with the idea of a siren call, as sirens are creature luring preys by melodies. 
+to have a theme i believe, create a web's personality without distracting from the actual content, like the cover art meant to creates a lovely illusion of a fair maiden, while the background gradient getting darker implies the dark abyss one might be lured in. 
+additionally, it creates creative space for minor storytelling on how you can match your content with the theme, like how i chose my playlist's songs slightly inspired by odysseus and his heroic encounter with the sirens: the songs started out with adventurous, brightful themes and gradually becoming darker.  
+  -->

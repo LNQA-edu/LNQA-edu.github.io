@@ -1,9 +1,9 @@
 :root {
   --primary-bg-color: #909fa7;
   --secondary-bg-color: #41525b;
-  --text-color: #6c544f;
-  --nav-bg-color: #ffffff;
-  --nav-bg-gradient-color: #ffffff;
+  --primary-text-color: #6c544f;
+  --secondary-text-color: #ffffff;
+  --expanded-bar-bg-color: #c7d0d6;
 }
 
 body {
@@ -17,6 +17,7 @@ body {
     #71848f 50%,
     rgba(255, 255, 255, 0)
   );
+  /* i have to admit i adjust so many times on this gradient i can't recall what rules am i even doing to make it work, i'm scared to touch it */
   color: var(--text-color);
   background: linear-gradient(
     var(--primary-bg-color) 70%,
@@ -31,7 +32,7 @@ nav {
   width: 100%;
   background: linear-gradient(
     to bottom,
-    var(--nav-bg-color) 10%,
+    var(--primary-bg-color) 10%,
     rgba(255, 255, 255, 0)
   );
 }
@@ -40,16 +41,16 @@ nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 40px; /* space between Home and About */
+  gap: 40px;
+  /* space between Home and About */
   padding: 16px 0;
   margin: 0;
-  text-decoration: none;
   font-size: 1.2rem;
 }
 
 nav a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--secondary-text-color);
   font-weight: 700;
 }
 
@@ -59,8 +60,31 @@ h1 {
   top: -600px;
   margin: 200px;
   font-size: 1.5rem;
-  color: var(--text-color);
+  color: var(--primary-text-color);
   font-style: italic;
+  text-shadow: 0 0 10px var(--secondary-bg-color);
+  /* text shadow: the px determines the direction of the shadow. 
+  the shadow helps creating more contrast as both text color and background color are quite light, and it helps the text stay on theme with the rest of the web */
+}
+
+h2,
+h3 {
+  text-align: center;
+  color: var(--secondary-text-color);
+  text-shadow: 0 0 10px var(--secondary-text-color);
+  /* in this context i used text-shadow as a glowing effect for texts. */
+}
+
+h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 10px 20px;
+  margin-bottom: 40px;
 }
 
 /* hero container — everything overlaps inside here */
@@ -75,12 +99,79 @@ img {
 }
 
 footer {
+  font-size: 0.8rem;
+  margin-top: 50px;
   padding: 10px;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to top,
-    var(--nav-bg-color) 10%,
-    rgba(255, 255, 255, 0)
-  );
+    var(--secondary-text-color) 10%,
+    rgba(255, 255, 255, 0)); */
   text-align: center;
   padding: 10px;
+  color: var(--secondary-text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* -------------------- */
+
+#playlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.song-bar {
+  background-color: var(--primary-bg-color);
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(211, 211, 211, 0.4);
+}
+
+.song-bar.expanded {
+  background-color: var(--expanded-bar-bg-color);
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #6d1212;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  margin-left: auto;
+}
+
+.song-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+}
+
+.song-artist {
+  font-size: 12px;
+  color: #b27b5f;
 }
