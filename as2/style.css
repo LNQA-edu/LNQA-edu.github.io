@@ -3,28 +3,25 @@
   --secondary-bg-color: #41525b;
   --primary-text-color: #6c544f;
   --secondary-text-color: #ffffff;
-  --expanded-bar-bg-color: #c7d0d6;
+  --expanded-bar-bg-color: #b0b7bc;
+  --media-player-bg-color: #d4dde4;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: "Mulish", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
   font-style: normal;
-  background: linear-gradient(
-    to bottom,
-    var(--primary-bg-color) 100%,
-    #71848f 50%,
-    rgba(255, 255, 255, 0)
-  );
-  /* i have to admit i adjust so many times on this gradient i can't recall what rules am i even doing to make it work, i'm scared to touch it */
-  color: var(--text-color);
   background: linear-gradient(
     var(--primary-bg-color) 70%,
     var(--secondary-bg-color) 98%
   );
+  min-height: 900px;
 }
 
+/* NAVIGATION BAR */
 nav {
   position: absolute;
   top: 0;
@@ -42,7 +39,6 @@ nav ul {
   display: flex;
   justify-content: center;
   gap: 40px;
-  /* space between Home and About */
   padding: 16px 0;
   margin: 0;
   font-size: 1.2rem;
@@ -54,90 +50,115 @@ nav a {
   font-weight: 700;
 }
 
-h1 {
+/* HERO */
+.hero {
   position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("webcover.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+h1 {
+  position: absolute;
+  top: 55%;
+  left: 15%;
+  max-width: 400px;
   text-align: left;
-  top: -600px;
-  margin: 200px;
   font-size: 1.5rem;
   color: var(--primary-text-color);
   font-style: italic;
   text-shadow: 0 0 10px var(--secondary-bg-color);
-  /* text shadow: the px determines the direction of the shadow. 
-  the shadow helps creating more contrast as both text color and background color are quite light, and it helps the text stay on theme with the rest of the web */
 }
 
+/* MAIN MEDIA PLAYER */
+#media-player {
+  background-color: var(--media-player-bg-color);
+  border-radius: 10px;
+  padding: 20px 40px;
+  box-shadow: 0 0 12px var(--secondary-bg-color);
+  margin-top: 40px;
+}
+
+.md-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.md-title {
+  font-size: 1.2rem;
+  color: var(--primary-text-color);
+}
+
+.md-artist {
+  font-size: 0.9rem;
+  color: var(--primary-text-color);
+}
+
+button {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1rem;
+  color: var(--primary-text-color);
+}
+
+button:hover {
+  scale: 0.85;
+}
+
+/* PLAYLIST */
 h2,
 h3 {
-  text-align: center;
   color: var(--secondary-text-color);
   text-shadow: 0 0 10px var(--secondary-text-color);
-  /* in this context i used text-shadow as a glowing effect for texts. */
 }
 
 h2 {
   font-size: 3.5rem;
   font-weight: 700;
+  margin-top: 60px;
 }
 
 h3 {
   font-size: 1rem;
   font-weight: 400;
-  margin: 10px 20px;
-  margin-bottom: 40px;
+  margin: 10px 20px 40px 20px;
 }
-
-/* hero container — everything overlaps inside here */
-.hero {
-  position: relative;
-  width: 100%;
-}
-
-img {
-  width: 100%;
-  display: block;
-}
-
-footer {
-  font-size: 0.8rem;
-  margin-top: 50px;
-  padding: 10px;
-  /* background: linear-gradient(
-    to top,
-    var(--secondary-text-color) 10%,
-    rgba(255, 255, 255, 0)); */
-  text-align: center;
-  padding: 10px;
-  color: var(--secondary-text-color);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* -------------------- */
 
 #playlist {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .song-bar {
   background-color: var(--primary-bg-color);
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin: 10px auto;
-  max-width: 640px;
-  width: 100%;
+  border-radius: 10px;
+  padding: 20px 40px;
+  margin: 15px auto;
+  width: 90%;
+  max-width: 1100px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(211, 211, 211, 0.4);
+  box-shadow: 0 0 12px var(--secondary-bg-color);
 }
 
 .song-bar.expanded {
   background-color: var(--expanded-bar-bg-color);
+}
+
+.song-bar:hover {
+  scale: 1.05;
 }
 
 .controls {
@@ -153,7 +174,7 @@ footer {
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #6d1212;
+  color: var(--primary-text-color);
 }
 
 .like-button {
@@ -166,12 +187,27 @@ footer {
 }
 
 .song-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 400;
   color: var(--secondary-text-color);
 }
 
-.song-artist {
-  font-size: 12px;
-  color: #b27b5f;
+/* FOOTER */
+footer {
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 50px;
+  padding: 20px 10px;
+  background: linear-gradient(
+    to top,
+    var(--secondary-text-color) 3%,
+    rgba(255, 255, 255, 0)
+  );
+  text-align: center;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+footer a {
+  color: var(--primary-text-color);
 }
