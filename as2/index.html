@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>sirencall</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,20 +42,29 @@
         <p class="md-artist">No artist</p>
       </div>
 
+       <div id="timeline" class="progress-area">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="time-display">
+          <span id="current-time">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+
      <div class="controls">
+
+        <button id="reverse-button" class="double-border">
+          <img
+            src="https://img.icons8.com/ios-glyphs/30/fast-forward.png"
+            alt=""
+            id="reverse-img"
+          />
+          </button>
+
         <button id="play-pause-button" class="double-border">
           <img
             src="https://img.icons8.com/ios-glyphs/30/play--v2.png"
             alt=""
             id="play-pause-img"
-          />
-        </button>
-
-        <button id="mute-unmute-button" class="double-border">
-          <img
-            src="https://img.icons8.com/ios-glyphs/30/no-audio--v1.png"
-            alt=""
-            id="mute-unmute-img"
           />
         </button>
 
@@ -67,12 +76,14 @@
           />
           </button>
 
-<button id="heart-button" class="double-border">
+           <button id="mute-unmute-button" class="double-border">
           <img
-            src="https://img.icons8.com/?size=36&id=DFU1kReSUccu&format=png&color=000000"
+            src="https://img.icons8.com/ios-glyphs/30/no-audio--v1.png"
             alt=""
+            id="mute-unmute-img"
           />
         </button>
+
       </div>
     </section>
 
@@ -84,42 +95,38 @@
     <!-- see bottom text for explanation on what <h3> is referencing. -->
 
     <div id="playlist">
+      
       <!-- main section, given id ="playlist" for later working in js code page. -->
       <div class="song-bar" onclick="toggleBar(this)">
         <div class="song-info">
           <p class="song-title">setsujoushort</p>
         </div>
-        <button class="like-button" onclick="event.stopPropagation()">♡</button>
-        <!-- onclick="event.stopPropagation()": stop like button from behaving like the main song bar -->
       </div>
 
       <div class="song-bar" onclick="toggleBar(this)">
         <div class="song-info">
           <p class="song-title">Bishop</p>
         </div>
-        <button class="like-button" onclick="event.stopPropagation()">♡</button>
       </div>
 
       <div class="song-bar" onclick="toggleBar(this)">
         <div class="song-info">
           <p class="song-title">Skimsnow</p>
         </div>
-        <button class="like-button" onclick="event.stopPropagation()">♡</button>
       </div>
 
       <div class="song-bar" onclick="toggleBar(this)">
         <div class="song-info">
           <p class="song-title">Hatsukoi</p>
         </div>
-        <button class="like-button" onclick="event.stopPropagation()">♡</button>
       </div>
 
       <div class="song-bar" onclick="toggleBar(this)">
         <div class="song-info">
           <p class="song-title">Negaiboshi</p>
         </div>
-        <button class="like-button" onclick="event.stopPropagation()">♡</button>
       </div>
+
     </div>
 
     <footer>
