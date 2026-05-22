@@ -1,0 +1,190 @@
+/* https://colorhunt.co/palette/1a120b3c2a21d5cea3e5e5cb */
+
+body {
+  background-color: #1a120b;
+  display: flex;
+  text-align: center;
+  margin: auto;
+  max-width: 1000px;
+  justify-content: center;
+  align-items: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: #e5e5cb;
+  /* color: #3c2a21; */
+  font-size: 1.1rem;
+  gap: 1.5rem;
+  overflow: hidden;
+  /*  */
+}
+
+.outer {
+  border: 2px dashed #e5e5cb7a;
+  width: 400px;
+  min-height: 200px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 1;
+  /* background-color: cornsilk; */
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    background-color 0.5s ease;
+}
+
+button {
+  padding: 10px 10px;
+  font-size: 1.4rem;
+  border-radius: 16px;
+  background-color: teal;
+  color: whitesmoke;
+  border-style: none;
+  box-shadow: 0px 0px 12px whitesmoke;
+  /* box shadow is just me being extra yeehaw */
+  cursor: pointer;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease,
+    box-shadow 0.8s ease,
+    scale 0.8s ease;
+  /* transition: 6.6-0.8s is ideal */
+  /* scale: ease gonna make color changing animation more aligned with the other transitions */
+}
+
+button:hover {
+  background-color: turquoise;
+  color: chocolate;
+  box-shadow: 0px 0px 12px chocolate;
+  scale: 1.2;
+}
+/* when hovering properties of button will change, like scale or color */
+
+/* DUCK */
+#duck-icon {
+  transition: background-color 0.8s ease;
+  cursor: pointer;
+}
+
+#duck-icon:hover {
+  /* background-color: aquamarine; svg has no background-color property */
+  fill: aquamarine;
+  /* use fill instead */
+  /* scale: 0.8; its not working it looks weird */
+}
+
+#duck {
+  transition:
+    translate 0.8s ease,
+    scale 0.8s ease,
+    rotate 0.8s ease;
+  cursor: pointer;
+  animation: bounce 1.2s linear infinite;
+}
+
+#duck:hover {
+  scale: 0.8;
+  rotate: 30deg;
+  /* this is in css tranform section (w9 slide) */
+}
+
+/* bouncing duck animation */
+@keyframes bounce {
+  0%,
+  20%,
+  70%,
+  100% {
+    translate: 0px 0px;
+  }
+  40% {
+    translate: 0px -30px;
+  }
+  60% {
+    translate: 0px -10px;
+  }
+}
+/* ------------------------------------------------- */
+
+/* summary of css animation: think of 
+1. start state 
+2. end state
+3. duration
+4. timing function
+*/
+
+/* KEYFRAMES ANIMATION: refer to JS page */
+/*  */
+#box {
+  width: 160px;
+  height: 160px;
+  background-color: rgb(213, 255, 255);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  /* animation-name: sale; */
+  animation-name: promotion, sale;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border: 3px dotted antiquewhite;
+}
+
+@keyframes promotion {
+  0% {
+    background-color: red;
+  }
+  30% {
+    background-color: orange;
+  }
+}
+
+@keyframes sale {
+  0% {
+    background-color: red;
+  }
+  30% {
+    background-color: orange;
+  }
+  50% {
+    background-color: yellow;
+  }
+  75% {
+    background-color: green;
+  }
+  100% {
+    background-color: blue;
+  }
+}
+
+#loader {
+  width: 100px;
+  height: 100px;
+  border: 3px solid red;
+  border-bottom-color: blue;
+  border-top-color: blue;
+  animation-name: spinning;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border-radius: 50%;
+}
+
+@keyframes spinning {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* heart pulsing animation: transform scale */
+/* hidden side bar: position (ex: bar is 300px so when u hide in u pull it -300px) */
