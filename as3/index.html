@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Girl: justice?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <!-- defer: JS loads after HTML is ready -->
+  </head>
+  <body>
+    <!-- START SCREEN -->
+    <div id="start-screen">
+      <img id="start-bg" src="test-bg.png" alt="" />
+      <img id="title" src="test-title.png" alt="" />
+      <button id="start-button">Start</button>
+    </div>
+
+    <!-- GAME SCREEN: display:none hides it on load, JS reveals it when start is clicked -->
+    <div id="game-screen" style="display: none">
+      <img id="background" src="test-bg.png" alt="" />
+      <img id="sprite" src="test-sprite.png" alt="" />
+      <div id="textbox">
+        <p id="dialogue">yayyy</p>
+        <button id="next-button">▶</button>
+        <div id="choices"></div>
+      </div>
+    </div>
+
+    <!-- CREDITS SCREEN: display:none keeps it hidden until end of game -->
+    <div id="credits-screen" style="display: none">
+      <p id="credits-text">
+        Music: <br />Sound Effects: <br />Sprite & CG Art: <br />Assets:
+        <br />Programmer:
+      </p>
+    </div>
+
+    <!-- END SCREEN: display:none keeps it hidden until credits finish -->
+    <div id="end-screen" style="display: none">
+      <img id="end-title" src="test-title.png" alt="" />
+      <img id="unlocked-art" src="test-sprite.png" alt="" />
+      <button id="restart-button">Start</button>
+      <div id="art-popup" style="display: none">
+        <!-- popup hidden until unlocked art is clicked -->
+        <p>your writing here</p>
+        <button id="close-popup">✕</button>
+      </div>
+    </div>
+  </body>
+</html>
