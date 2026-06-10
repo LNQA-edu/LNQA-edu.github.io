@@ -133,7 +133,7 @@ const scenes = {
       // hideBox: true, // hides dialogue box for this line, showcasing the axe
       // },
       // {
-      //   text: "But I am giving you a choice, it is my last ounce of hospitality, like the Magical Girl teachings they like to stuff in our heads.",
+      //   text: "But I am giving you a choice. It is my last ounce of hospitality, like the Magical Girl teachings they like to stuff in our heads.",
       //   sprite: "test-sprite.png",
       // },
       // { text: "Just click a damn button.", sprite: "test-sprite.png" },
@@ -161,7 +161,11 @@ const scenes = {
     background: "test-bg.png",
     lines: [
       {
-        text: "It doesn't matter, anyway. Nothing matters, not anymore.",
+        text: "It doesn't matter anyway.",
+        sprite: "test-sprite.png",
+      },
+      {
+        text: "Nothing matters, not anymore.",
         sprite: "test-sprite.png",
       },
       { text: "Come on now.", sprite: "test-sprite.png" },
@@ -332,3 +336,5 @@ document.getElementById("extra-button").addEventListener("click", function () {
 document.getElementById("close-popup").addEventListener("click", function () {
   document.getElementById("art-popup").style.display = "none";
 });
+
+/* Well this was horrifying to code, haha. */
