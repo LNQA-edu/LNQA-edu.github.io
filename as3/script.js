@@ -1,150 +1,334 @@
+// holds timer references so they can be cancelled if player clicks in time
+let autoTimer;
+let countdownInterval;
+
 // --- SCENE DATA ---
-// each scene holds its background, sprite, dialogue, and choices
-// choices use "next" to point to the next scene by name
+// each scene holds background, sprite lines, choices, and optional timer flag
 const scenes = {
   start: {
     background: "test-bg.png",
-    sprite: "test-sprite.png",
-    text: "Hello, it's good to finally meet you.",
+    lines: [
+      // {
+      //   text: "Hello, it's good to finally meet you.",
+      //   sprite: "test-sprite.png",
+      // },
+      // {
+      //   text: "Oh you are adorable! I'm glad it's you who is aiding me.",
+      //   sprite: "test-sprite.png",
+      // },
+      // {
+      //   text: "Let's save the world together by defeating evil, in the name of justice.",
+      //   sprite: "test-sprite.png",
+      // },
+    ],
     choices: [
       { text: "Yes", next: "end" },
-      { text: "Who are you?", next: "scene2" },
+      { text: "Who are you?", next: "scene6" },
     ],
   },
-  scene2: {
-    background: "test-bg.png",
-    sprite: "test-sprite.png",
-    text: "I am your best Magical Girl, beacon of Justice, always ready to save the day!",
-    choices: [
-      { text: "Yes", next: "end" },
-      { text: "What do you mean by 'evil'?", next: "scene3" },
-    ],
-  },
-  scene3: {
-    background: "assets/bg1.png",
-    sprite: "assets/sprites/neutral.png",
-    text: "Not what - it's who, silly!",
-    choices: [
-      { text: "Yes", next: "end" },
-      { text: "What have they done that was so evil?", next: "scene4" },
-    ],
-  },
-  scene4: {
-    background: "assets/bg1.png",
-    sprite: "assets/sprites/angry.png",
-    text: "I'm afraid we do not have time for this, but if you must know…",
-    choices: [
-      { text: "Yes", next: "end" },
-      { text: "That's not enough to end people.", next: "scene5" },
-    ],
-  },
-  scene5: {
-    background: "assets/bg1.png",
-    sprite: "assets/sprites/angry.png",
-    text: "When will it be enough then? When they finally have the slightest ounce of mercy to just shut up?",
-    choices: [
-      { text: "Yes", next: "end" },
-      { text: "No", next: "scene6" },
-    ],
-  },
+  // scene2: {
+  //   background: "test-bg.png",
+  //   lines: [
+  //     {
+  //       text: "I am your best Magical Girl, beacon of Justice, always ready to save the day!",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "Let us save the world against the force of evil.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //   ],
+  //   choices: [
+  //     { text: "Yes", next: "end" },
+  //     { text: "What do you mean by 'evil'?", next: "scene3" },
+  //   ],
+  // },
+  // scene3: {
+  //   background: "test-bg.png",
+  //   lines: [
+  //     { text: "Not what - it's who, silly!", sprite: "test-sprite.png" },
+  //     {
+  //       text: "And who else could I mean if not this whole planet's people.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "All those who take breaths, aside from you and me. They are those who give evil a meaning.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "I want to take them all down. That's why I called for your help.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //   ],
+  //   choices: [
+  //     { text: "Yes", next: "end" },
+  //     { text: "What have they done that was so evil?", next: "scene4" },
+  //   ],
+  // },
+  // scene4: {
+  //   background: "test-bg.png",
+  //   lines: [
+  //     {
+  //       text: "I'm afraid we do not have time for this, but if you must know…",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     { text: "What have they not done?", sprite: "test-sprite.png" },
+  //     {
+  //       text: "The last representation of Justice was lost by their hand, simply just because she could not save a civilian out of a million that she had.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "They hurled insults at her publicly, or on any media they could. Even when she had done everything to make herself smaller, they still found ways to hurt her.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "They turned on her the moment she stumbled. It is only sensible to think that evil representations are those who destroy justice.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "Again, I request for a stop to this conversation, and to them.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //   ],
+  //   choices: [
+  //     { text: "Yes", next: "end" },
+  //     { text: "That's not enough to end people.", next: "scene5" },
+  //   ],
+  // },
+  // scene5: {
+  //   background: "test-bg.png",
+  //   lines: [
+  //     {
+  //       text: "When will it be enough then? When they finally have the slightest ounce of mercy to just shut up?",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "Or when they got their sick satisfaction in seeing my sister hang on a rope?",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "As lovely as you are to me, you are pretty dense.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //     {
+  //       text: "But it is fine. All is fine, all will be fine, if you could lend me your aid.",
+  //       sprite: "test-sprite.png",
+  //     },
+  //   ],
+  //   choices: [
+  //     { text: "Yes", next: "end" },
+  //     { text: "No", next: "scene6" },
+  //   ],
+  // },
   scene6: {
-    background: "assets/bg1.png",
-    sprite: "assets/sprites/angry.png",
-    text: "Actually, you don't have a say in this.",
-    choices: [
-      { text: "Yes", next: "end_forced" }, // both choices lead to same place
-      { text: "Yes", next: "end_forced" }, // agency is removed intentionally
+    background: "test-bg.png",
+    lines: [
+      // {
+      //   text: "Actually, you don't have a say in this.",
+      //   sprite: "test-sprite.png",
+      // },
+      // {
+      //   text: "I am not asking.",
+      //   sprite: "test-sprite.png",
+      // hideBox: true, // hides dialogue box for this line, showcasing the axe
+      // },
+      // {
+      //   text: "But I am giving you a choice, it is my last ounce of hospitality, like the Magical Girl teachings they like to stuff in our heads.",
+      //   sprite: "test-sprite.png",
+      // },
+      // { text: "Just click a damn button.", sprite: "test-sprite.png" },
+      { text: "Now.", sprite: "test-sprite.png" },
     ],
+    choices: [
+      { text: "Yes", next: "end" },
+      { text: "Yes", next: "end" }, // both choices lead same place, agency removed
+    ],
+    timed: true, // triggers countdown when choices appear
+    timer: 3, // seconds before auto-selecting
   },
   end_forced: {
-    background: "assets/bg2.png",
-    sprite: "assets/sprites/happy.png",
-    text: "I know you would choose right.",
-    choices: [], // no choices, click to advance
+    background: "test-bg.png",
+    lines: [
+      {
+        text: "They are both the same thing dummy. What is taking you so long then, haha.",
+        sprite: "test-sprite.png",
+      },
+    ],
+    choices: [], // no choices, click next to continue to end
+    nextScene: "end",
   },
   end: {
-    background: "assets/bg2.png",
-    sprite: "assets/sprites/happy.png",
-    text: "I knew you would understand.",
-    choices: [], // no choices, click to advance
+    background: "test-bg.png",
+    lines: [
+      {
+        text: "It doesn't matter, anyway. Nothing matters, not anymore.",
+        sprite: "test-sprite.png",
+      },
+      { text: "Come on now.", sprite: "test-sprite.png" },
+      {
+        text: "Let us defeat evil, in the name of Justice.",
+        sprite: "test-sprite.png",
+        cg: "test-sprite.png",
+      }, // cg property triggers CG art on this line
+    ],
+    choices: [], // no choices, click next to go to credits
   },
 };
 
 // --- GRAB ELEMENTS ---
-// stored as variables so we don't query the DOM repeatedly
+// stored as variables to avoid querying the DOM repeatedly
 const background = document.getElementById("background");
 const sprite = document.getElementById("sprite");
+const cgArt = document.getElementById("cg-art");
 const dialogue = document.getElementById("dialogue");
 const choicesDiv = document.getElementById("choices");
+const nextButton = document.getElementById("next-button");
+const timerBarContainer = document.getElementById("timer-bar-container");
+const timerBar = document.getElementById("timer-bar");
+const textbox = document.getElementById("textbox"); // added for hideBox feature
 
 // --- SHOW SCENE ---
-// updates all visual elements and generates choice buttons for the current scene
+// loads a scene by id, renders first line, sets up next button
 function showScene(sceneId) {
   const scene = scenes[sceneId];
-  background.src = scene.background; // swap background image
-  sprite.src = scene.sprite; // swap character sprite
-  dialogue.textContent = scene.text; // update dialogue text
-  choicesDiv.innerHTML = ""; // clear previous choice buttons
+  background.src = scene.background;
+  choicesDiv.innerHTML = "";
+  cgArt.style.display = "none"; // hide cg art at start of every scene
+  cgArt.src = "";
+  textbox.style.display = "block"; // always reset textbox visibility on new scene
 
-  if (scene.choices.length === 0) {
-    // no choices means end of a story branch, click dialogue to continue
-    dialogue.addEventListener("click", function handler() {
-      dialogue.removeEventListener("click", handler); // remove after one use
-      showCredits();
-    });
+  let lineIndex = 0;
+
+  function showLine() {
+    if (lineIndex < scene.lines.length) {
+      const line = scene.lines[lineIndex];
+      dialogue.textContent = line.text;
+      sprite.src = line.sprite;
+
+      if (line.cg) {
+        cgArt.src = line.cg; // load cg art source
+        cgArt.style.display = "block"; // show cg art on this line
+        sprite.style.display = "none"; // hide sprite when cg art shows
+      }
+
+      if (line.hideBox) {
+        // hides textbox after a short delay so player can read the line first
+        setTimeout(function () {
+          textbox.style.display = "none";
+          document.addEventListener("click", function revealBox() {
+            textbox.style.display = "block"; // click anywhere to bring it back
+            document.removeEventListener("click", revealBox); // removes after one use
+          });
+        }, 1500); // 1.5 seconds before hiding, adjust to taste
+      }
+
+      lineIndex++;
+      nextButton.style.display = "block";
+      choicesDiv.innerHTML = "";
+    } else {
+      // all lines shown, move to choices
+      nextButton.style.display = "none";
+      showChoices(scene);
+    }
+  }
+
+  nextButton.onclick = showLine; // each click advances one line
+  showLine(); // show first line immediately
+}
+
+// --- SHOW CHOICES ---
+// renders choice buttons, handles timed scenes and empty choice scenes
+function showChoices(scene) {
+  if (!scene.choices || scene.choices.length === 0) {
+    // no choices: if scene has a nextScene go there, otherwise go to credits
+    nextButton.style.display = "block";
+    nextButton.onclick = scene.nextScene
+      ? function () {
+          showScene(scene.nextScene);
+        }
+      : showCredits;
     return;
   }
 
-  // generate a button for each choice in the scene
   scene.choices.forEach(function (choice) {
     const btn = document.createElement("button");
     btn.textContent = choice.text;
-    btn.className = "choice-btn"; // shared class for consistent styling
+    btn.className = "choice-btn";
     btn.addEventListener("click", function () {
-      showScene(choice.next); // clicking loads the next scene
+      clearTimeout(autoTimer); // cancel timer if player clicks in time
+      clearInterval(countdownInterval);
+      timerBarContainer.style.display = "none";
+      timerBar.style.width = "100%"; // reset bar for next time
+      showScene(choice.next);
     });
     choicesDiv.appendChild(btn);
   });
+
+  if (scene.timed) {
+    // show timer bar and start countdown
+    timerBarContainer.style.display = "block";
+    timerBar.style.transition = `width ${scene.timer}s linear`; // smooth shrink over timer duration
+    timerBar.style.width = "100%";
+
+    // small delay so browser registers the transition properly
+    setTimeout(function () {
+      timerBar.style.width = "0%";
+    }, 50);
+
+    // auto-select when timer runs out
+    autoTimer = setTimeout(function () {
+      clearInterval(countdownInterval);
+      timerBarContainer.style.display = "none";
+      timerBar.style.width = "100%";
+      choicesDiv.innerHTML = "";
+      showScene("end_forced");
+    }, scene.timer * 1000);
+  }
 }
 
 // --- SCREEN TRANSITIONS ---
-// hides one screen and shows another to simulate page changes
+// hides one screen and reveals another
 function switchScreen(hideId, showId) {
   document.getElementById(hideId).style.display = "none";
-  document.getElementById(showId).style.display = "block";
+  document.getElementById(showId).style.display = "flex";
 }
 
 // --- CREDITS ---
-// shows black credits screen briefly before revealing end screen
+// shows credits screen with main menu button
 function showCredits() {
   switchScreen("game-screen", "credits-screen");
-  document.getElementById("credits-text").textContent = "your credits here";
-  setTimeout(function () {
-    switchScreen("credits-screen", "end-screen"); // auto advance after 4 seconds
-  }, 4000);
+  sprite.style.display = "block"; // reset sprite visibility for next playthrough
 }
 
 // --- START BUTTON ---
-// hides start screen and loads first scene when player clicks start
-document.getElementById("start-btn").addEventListener("click", function () {
+// hides start screen, shows game screen, loads first scene
+document.getElementById("start-button").addEventListener("click", function () {
   switchScreen("start-screen", "game-screen");
   showScene("start");
 });
 
+// --- MAIN MENU BUTTON ---
+// on credits screen, clicking goes to end screen (post-credits start screen)
+document.getElementById("menu-button").addEventListener("click", function () {
+  switchScreen("credits-screen", "restart-screen");
+});
+
 // --- RESTART BUTTON ---
-// returns player to beginning from end screen
-document.getElementById("restart-btn").addEventListener("click", function () {
-  switchScreen("end-screen", "game-screen");
-  showScene("start");
+document
+  .getElementById("restart-button")
+  .addEventListener("click", function () {
+    switchScreen("restart-screen", "game-screen");
+    showScene("start");
+  });
+
+// --- EXTRA BUTTON ---
+// on end screen, clicking extra opens the unlocked art popup
+document.getElementById("extra-button").addEventListener("click", function () {
+  document.getElementById("art-popup").style.display = "flex";
 });
 
-// --- UNLOCKED ART POPUP ---
-// clicking the unlocked art on end screen opens a popup with extra writing
-document.getElementById("unlocked-art").addEventListener("click", function () {
-  document.getElementById("art-popup").style.display = "block";
-});
-
-// closes the popup when X is clicked
+// --- CLOSE POPUP ---
+// closes the art popup
 document.getElementById("close-popup").addEventListener("click", function () {
   document.getElementById("art-popup").style.display = "none";
 });

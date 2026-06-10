@@ -7,51 +7,89 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-    <!-- defer: JS loads after HTML is ready -->
   </head>
   <body>
-    <!-- START SCREEN -->
+    START SCREEN
     <div id="start-screen">
-      <img id="start-bg" src="test-bg.png" alt="" />
-      <img id="title" src="test-title.png" alt="" />
-      <button id="start-button">Start</button>
+      <img id="start-bg" src="test-bg.png" alt="background" />
+      <div id="title-container">
+        <img id="title" src="test-title.png" alt="title" />
+        <button id="start-button">START</button>
+      </div>
     </div>
 
-    <!-- GAME SCREEN: display:none hides it on load, JS reveals it when start is clicked -->
+    <!-- GAME SCREEN: hidden on load, revealed when start button is clicked -->
     <div id="game-screen" style="display: none">
-      <img id="background" src="test-bg.png" alt="" />
-      <img id="sprite" src="test-sprite.png" alt="" />
+      <img id="background" src="test-bg.png" alt="bg" />
+      <img id="sprite" src="test-sprite.png" alt="sprite" />
+      <img id="cg-art" src="test-sprite.png" alt="cg" />
+      <!-- CG art shown at end scene, hidden by default -->
       <div id="textbox">
-        <p id="dialogue">yayyy</p>
+        <p id="dialogue"></p>
+        <div id="timer-bar-container">
+          <!-- wraps timer bar for styling -->
+          <div id="timer-bar"></div>
+          <!-- shrinks via JS to show countdown visually -->
+        </div>
         <button id="next-button">▶</button>
         <div id="choices"></div>
       </div>
     </div>
 
-    <!-- CREDITS SCREEN: display:none keeps it hidden until end of game -->
+    <!-- CREDITS SCREEN: hidden until end dialogue finishes -->
     <div id="credits-screen" style="display: none">
+      <h1>CREDITS</h1>
       <p id="credits-text">
-        Music: <br />Sound Effects: <br />Sprite & CG Art: <br />Assets:
+        Music: <br />Sound Effects: <br />Sprite & CG Arts: Abbey <br />Assets:
         <br />Programmer:
       </p>
+      <button id="menu-button">Main Menu</button>
+      <!-- returns to end screen after credits -->
     </div>
 
-    <!-- END SCREEN: display:none keeps it hidden until credits finish -->
-    <div id="end-screen" style="display: none">
-      <img id="end-title" src="test-title.png" alt="" />
-      <img id="unlocked-art" src="test-sprite.png" alt="" />
-      <button id="restart-button">Start</button>
-      <div id="art-popup" style="display: none">
-        <!-- popup hidden until unlocked art is clicked -->
-        <p>your writing here</p>
-        <button id="close-popup">✕</button>
+    <!-- RESTART SCREEN: hidden until main menu is clicked from credits -->
+    <div id="restart-screen" style="display: none">
+      <img id="restart-bg" src="test-bg.png" alt="" />
+      <!-- same bg as start screen -->
+      <img id="restart-title" src="test-title.png" alt="" />
+      <button id="restart-button">START</button>
+      <button id="extra-button">EXTRAS</button>
+      <button id="credits-button">CREDITS</button>
+      <!-- reveals extra content -->
+      <div>
+        <img id="unlocked-art" src="test-sprite.png" alt="" />
       </div>
     </div>
   </body>
 </html>
+
+<!-- DESIGN INTENTIONS:
+I think it is always lovely to have a chance to put design intentions in writing, to clarify the thought process behind both coding and visual choices, even if I tend to be quite emotional, abstract and lengthy in my explanation.
+I am a huge fan of visual novel, where you can tell a story that is supported by other medias like images or sounds, in order to enhance user experience. 
+Although, unlike animations or comics, visual novels do not required too much money in production, and can be made by a single person, they are still able to create a very immersive experience.
+I have played thousands of visual novels, but most of them are made in Ren'py. Luckily,the app also only used basic coding language to execute.  
+I think all the mentioned aspects made this genre to be very viable for a course-ending assignment, even if the whole process of making it makes me severely questioning myself.  
+In fact, the storyline is slightly drawn from my experience with anxiety and self-doubts. 
+I think it is fun to explore Magical Girl layers, as on the surface she seems to be a hypocrite in pink, with how her sweet looks contrast her narrow-minded understanding of the definition of good and evil.
+But if I have more time and resources, I would like to write about her backstory. 
+
+She's suppose to be a breeded horse of an organization that masked themselves as the "good" force. 
+Her mentality is a result of constant physical tortures from her training to make use of her magical abilities, 
+and emotional torments when she realized that if she or her predecessors (her big sister) failed, 
+it would result in a cycle of abuse where the organization would just push another of her family members to be the next hero in line. 
+Although, the grooming from the organization made her unable to frame them as source of her trauma.
+Instead, she blames it on those she sworn to protect. Even if the people are also at fault for their misinformation too
+(to be clear though, magical girls are both the organization's money maker and meatshield).
+My point is, Magical Girl is inspired how I view myself. 
+It is both exciting and antagonizing to be a feminine figure with conflicts of wanting the world to like me (shown through the way I dress), and to just wanting to ignore it all.
+
+I think what I was trying to achieve the most, visually, is how far can I push a darker topic within academic comport.
+And from there trying to find elevation points within coding, such as in-game mechanisms or through other medias like sounds or timing events. 
+Overall, this project was very useful in understanding basic coding languages, and learning more of design communicating between users and designers!
+-->

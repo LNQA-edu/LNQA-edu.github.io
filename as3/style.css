@@ -1,28 +1,24 @@
-/* full page setup, no scroll, everything contained */
-root {
-  --primary-bg-color: #ffe0e6;
+:root {
+  --primary-bg-color: #ffedf1;
   --secondary-bg-color: #ffb3c6;
   --primary-text-color: #ffffff;
-  --secondary-text-color: #4d1f1c;
+  --secondary-text-color: #765561;
+  --credit-bg-color: #4e2c35;
 }
 
 body {
-  font-family: "Google Sans", sans-serif;
+  font-family: "Fredoka", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400px;
+  font-weight: 400;
   font-style: normal;
-  font-variation-settings: "GRAD" 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background: rgb(148, 196, 196);
+  font-variation-settings: "wdth" 100;
 }
 
-/* each screen fills the full viewport and stacks elements centrally */
+/* each screen fills the full viewport */
 #start-screen,
 #game-screen,
 #credits-screen,
-#end-screen {
+#restart-screen {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -32,85 +28,154 @@ body {
   position: relative;
 }
 
-/* title sizing */
+/* start and restart screen background images fill behind everything */
+#start-bg,
+#restart-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* title and buttons sit above bg */
 #title,
-#end-title {
+#restart-title {
+  position: relative;
+  z-index: 1;
   width: 400px;
 }
 
-/* start and restart buttons share the same style via separate rules */
 #start-button,
 #restart-button {
-  margin: 10px;
-  padding: 10px 10px;
-  font-size: 1.2rem;
+  margin-top: 10px;
+  padding: 5px 15px;
+  font-size: 1.5rem;
   cursor: pointer;
   background: var(--secondary-bg-color);
   border-radius: 10px;
   border: none;
   box-shadow: 0 0 12px var(--primary-text-color);
+  position: relative;
+  z-index: 1;
 }
 
-/* background fills the full game screen behind everything */
+/* game screen background sits behind everything */
 #background {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0; /* sits behind sprite and textbox */
+  z-index: 0;
 }
 
-/* sprite sits above background, anchored to bottom center */
+/* cg art fills screen above background but below textbox */
+#cg-art {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: none;
+  /* hidden until end scene triggers it */
+}
+
+/* sprite anchored to bottom center above background */
 #sprite {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   height: 80%;
-  z-index: 1; /* sits above background */
+  z-index: 2;
 }
 
-/* textbox sits at the bottom above everything */
+/* textbox sits at bottom above sprite */
 #textbox {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(255, 220, 230, 0.9);
+  bottom: 30px; /* lifts it slightly off the bottom edge */
+  left: 50%;
+  transform: translateX(-50%); /* centres it horizontally */
+  width: 70%; /* matches that contained width in the preview */
+  height: 30%;
+  background: var(--primary-bg-color);
   padding: 20px;
-  z-index: 2; /* sits above sprite and background */
+  border-radius: 10px; /* rounded corners */
+  z-index: 3;
 }
 
 #dialogue {
-  font-size: 16px;
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-/* choice buttons sit inside textbox */
+/* timer bar container is the full width track */
+#timer-bar-container {
+  width: 400px; /* shorter than full width, change to taste */
+  height: 12px; /* bigger/thicker bar */
+  background: rgba(255, 180, 200, 0.4);
+  border-radius: 6px;
+  margin: 10px auto; /* auto centres it horizontally in the textbox */
+  display: none; /* hidden until JS needs it */
+}
+
+/* timer bar shrinks from full width to zero via JS */
+#timer-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--secondary-bg-color);
+  border-radius: 6px; /* matches container so edges stay rounded as it shrinks */
+  transition: width linear;
+}
+
+#next-button {
+  display: none; /* hidden until JS needs it */
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+}
+
 #choices {
   display: flex;
   gap: 10px;
+  color: pink;
 }
 
-.choice-btn {
+.choice-button {
   padding: 8px 20px;
   cursor: pointer;
-  background: pink;
+  background: var(--secondary-bg-color);
   border: none;
   font-size: 14px;
+  border-radius: 8px;
 }
 
-/* credits text centered on black screen */
+/* credits screen black background */
+#credits-screen {
+  background: #393939;
+}
+
 #credits-text {
   color: white;
   font-size: 16px;
   text-align: center;
+  line-height: 2;
 }
 
-/* popup overlays the end screen */
+/* popup overlays end screen */
 #art-popup {
   position: absolute;
   background: white;
   padding: 30px;
   z-index: 3;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#unlocked-art {
+  width: 300px;
 }
