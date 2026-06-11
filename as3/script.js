@@ -308,34 +308,29 @@ function showChoices(scene, currentTextbox, currentChoicesDiv) {
 }
 
 // --- SCREEN TRANSITIONS ---
-// hides one screen and reveals another
 function switchScreen(hideId, showId) {
   document.getElementById(hideId).style.display = "none";
   document.getElementById(showId).style.display = "flex";
 }
 
 // --- CREDITS ---
-// shows credits screen with main menu button
 function showCredits() {
   switchScreen("game-screen", "credits-screen");
   sprite.style.display = "block"; // reset sprite visibility for next playthrough
 }
 
 // --- START BUTTON ---
-// hides start screen, shows game screen, loads first scene
 document.getElementById("start-button").addEventListener("click", function () {
   switchScreen("start-screen", "game-screen");
   showScene("start");
 });
 
 // --- MAIN MENU BUTTON ---
-// on credits screen, clicking goes to restart screen
 document.getElementById("menu-button").addEventListener("click", function () {
   switchScreen("credits-screen", "restart-screen");
 });
 
 // --- RESTART BUTTON ---
-// on restart screen, clicking start replays the game
 document
   .getElementById("restart-button")
   .addEventListener("click", function () {
@@ -350,7 +345,6 @@ document.getElementById("extra-button").addEventListener("click", function () {
 });
 
 // --- CLOSE POPUP ---
-// closes the art popup
 document.getElementById("close-popup").addEventListener("click", function () {
   document.getElementById("art-popup").style.display = "none";
 });

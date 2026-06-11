@@ -215,14 +215,31 @@ body {
 
 /* credits screen black background */
 #credits-screen {
-  background: #393939;
+  background: var(--credit-bg-color);
 }
 
 #credits-text {
   color: var(--primary-text-color);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: center;
-  line-height: 2;
+  line-height: 1.5;
+}
+
+#menu-button {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: var(--primary-text-color);
+  color: var(--credit-bg-color);
+  text-decoration: none;
+  border-radius: 10px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#menu-button:hover {
+  scale: 1.05;
 }
 
 /* popup overlays end screen */
@@ -239,5 +256,20 @@ body {
 }
 
 #unlocked-art {
-  width: 300px;
+  width: 700px;
 }
+
+/* The total of customized assets in this project is:
+a) 2 backgrounds
+b) 3 sprites
+c) 1 CG art
+d) 1 logo/title image
+e) 1 extra art from concept testing (unlockable content)
+I think this was a good practice on a lot of process other than coding: writing, drawing,...
+I also had a chance to practice handling much more assets than my previous assignments, even if its not required.
+Eventhough I accidentally overwhelmed myself and have to outsource to be able to finish the sprite art and cg art... (special thanks to Abbey <3) 
+I think it adds a little extra to what I have to show when the action I chose (clicking) is possibly considered a bit basic.
+It was also especially fun to code a "fake" start screen, where the way I layout the start screen and my coding system only makes sense after you finish the experience. 
+Although, I hope my style of doing code comments this time is not too rude :3 
+As this project was much more personal for me, I prefer expressing my raw feelings over pure academic writing. 
+ */
