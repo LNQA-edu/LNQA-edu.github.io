@@ -4,14 +4,33 @@
   --primary-text-color: #ffffff;
   --secondary-text-color: #765561;
   --credit-bg-color: #4e2c35;
+  --shadow-color: #c2abb4;
 }
 
 body {
   font-family: "Fredoka", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 550;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+}
+
+#title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* aligns children to the left */
+  gap: 10px;
+  position: absolute; /* lets you place it anywhere on screen */
+  left: 25%; /* distance from left edge */
+  top: 20%; /* distance from top edge */
+  z-index: 1;
+}
+
+#title,
+#restart-title {
+  width: 400px;
+  position: relative;
+  z-index: 1;
 }
 
 /* each screen fills the full viewport */
@@ -48,16 +67,34 @@ body {
 
 #start-button,
 #restart-button {
-  margin-top: 10px;
-  padding: 5px 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  background: var(--secondary-bg-color);
+  padding: 10px 20px;
+  background: linear-gradient(
+    to right,
+    var(--secondary-bg-color) 10%,
+    #e4667d 100%
+  );
   border-radius: 10px;
   border: none;
-  box-shadow: 0 0 12px var(--primary-text-color);
+  box-shadow: 5px 5px 10px var(--shadow-color);
+  color: var(--primary-text-color);
+}
+
+#start-button:hover {
+  scale: 1.1;
+}
+
+#restart-button:hover {
+  scale: 1.1;
+}
+
+#start-button,
+#restart-button #extra-button,
+#credits-button {
+  font-size: 2rem;
+  cursor: pointer;
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 /* game screen background sits behind everything */
@@ -108,6 +145,7 @@ body {
 #dialogue {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  color: var(--secondary-text-color);
 }
 
 /* timer bar container is the full width track */
@@ -140,13 +178,17 @@ body {
 #choices {
   display: flex;
   gap: 10px;
-  color: pink;
+  color: #393939;
 }
 
 .choice-button {
   padding: 8px 20px;
   cursor: pointer;
-  background: var(--secondary-bg-color);
+  background: linear-gradient(
+    to right,
+    var(--secondary-bg-color) 10%,
+    #e4667d 100%
+  );
   border: none;
   font-size: 14px;
   border-radius: 8px;

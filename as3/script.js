@@ -75,22 +75,22 @@ const scenes = {
       {
         text: "What have they not done?",
         sprite: "angry-sprite.png",
-        background: "dark-bg.png",
+        background: "light-bg.png",
       },
       {
         text: "The last representation of Justice was lost by their hand, simply just because she could not save a civilian out of a million that she had.",
         sprite: "angry-sprite.png",
-        background: "dark-bg.png",
+        background: "light-bg.png",
       },
       {
         text: "They hurled insults at her publicly, or on any media they could. Even when she had done everything to make herself smaller, they still found ways to hurt her.",
         sprite: "angry-sprite.png",
-        background: "dark-bg.png",
+        background: "light-bg.png",
       },
       {
         text: "They turned on her the moment she stumbled. It is only sensible to think that evil representations are those who destroy justice.",
         sprite: "angry-sprite.png",
-        background: "dark-bg.png",
+        background: "light-bg.png",
       },
       {
         text: "Again, I request for a stop to this conversation, and to them.",
@@ -108,8 +108,8 @@ const scenes = {
     lines: [
       {
         text: "When will it be enough then? When they finally have the slightest ounce of mercy to just shut up?",
-        sprite: "angry-sprite.png",
-        background: "dark-bg.png",
+        sprite: "neutral-sprite.png",
+        background: "light-bg.png",
       },
       {
         text: "Or when they got their sick satisfaction in seeing my sister hang on a rope?",
@@ -118,13 +118,13 @@ const scenes = {
       },
       {
         text: "As lovely as you are to me, you are pretty dense.",
-        sprite: "neutral-sprite.png",
+        sprite: "angry-sprite.png",
         background: "dark-bg.png",
       },
       {
         text: "But it is fine. All is fine, all will be fine, if you could lend me your aid.",
         sprite: "neutral-sprite.png",
-        background: "dark-bg.png",
+        background: "light-bg.png",
       },
     ],
     choices: [
@@ -228,7 +228,7 @@ function showScene(sceneId) {
             textbox.style.display = "block"; // click anywhere to bring it back
             document.removeEventListener("click", revealBox); // removes after one use
           });
-        }, 1500); // 1.5 seconds before hiding, adjust to taste
+        }, 3000); // 3 seconds before hiding
       }
 
       lineIndex++;
