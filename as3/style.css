@@ -3,7 +3,7 @@
   --secondary-bg-color: #ffb3c6;
   --primary-text-color: #ffffff;
   --secondary-text-color: #765561;
-  --credit-bg-color: #4e2c35;
+  --credit-bg-color: #584a4e;
   --shadow-color: #c2abb4;
 }
 
@@ -15,21 +15,16 @@ body {
   font-variation-settings: "wdth" 100;
 }
 
-#title-container {
+#title-container,
+.title-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* aligns children to the left */
+  align-items: center;
+  /* centers everything */
   gap: 10px;
-  position: absolute; /* lets you place it anywhere on screen */
-  left: 25%; /* distance from left edge */
-  top: 20%; /* distance from top edge */
-  z-index: 1;
-}
-
-#title,
-#restart-title {
-  width: 400px;
-  position: relative;
+  position: absolute; /* place stuff anywhere on screen */
+  left: 8%; /* distance from left edge */
+  top: 0%; /* distance from top edge */
   z-index: 1;
 }
 
@@ -47,7 +42,7 @@ body {
   position: relative;
 }
 
-/* start and restart screen background images fill behind everything */
+/* images fill behind everything */
 #start-bg,
 #restart-bg {
   position: absolute;
@@ -57,16 +52,17 @@ body {
   z-index: 0;
 }
 
-/* title and buttons sit above bg */
 #title,
 #restart-title {
   position: relative;
   z-index: 1;
-  width: 400px;
+  width: 650px;
+  left: 0%;
 }
 
 #start-button,
 #restart-button {
+  font-size: 1.8rem;
   padding: 10px 20px;
   background: linear-gradient(
     to right,
@@ -79,22 +75,41 @@ body {
   color: var(--primary-text-color);
 }
 
-#start-button:hover {
-  scale: 1.1;
-}
-
+#start-button:hover,
 #restart-button:hover {
   scale: 1.1;
 }
 
+.choice-button:hover {
+  scale: 1.1; /* only the hovered button scales, not both */
+  cursor: pointer;
+}
+
 #start-button,
-#restart-button #extra-button,
+#restart-button,
+#extra-button,
 #credits-button {
-  font-size: 2rem;
   cursor: pointer;
   position: relative;
   z-index: 1;
   text-align: center;
+}
+
+#extra-button,
+#credits-button {
+  font-size: 1.6rem;
+  padding: 10px 20px;
+  background: none;
+  color: var(--secondary-text-color);
+  text-decoration: underline;
+  border-radius: 10px;
+  border: none;
+  box-shadow: none;
+}
+
+#extra-button:hover,
+#credits-button:hover {
+  scale: 0.95;
 }
 
 /* game screen background sits behind everything */
@@ -106,7 +121,7 @@ body {
   z-index: 0;
 }
 
-/* cg art fills screen above background but below textbox */
+/* cg art fills screen above background but behind textbox */
 #cg-art {
   position: absolute;
   width: 100%;
@@ -138,8 +153,17 @@ body {
   height: 30%;
   background: var(--primary-bg-color);
   padding: 20px;
-  border-radius: 10px; /* rounded corners */
+  border-radius: 10px;
   z-index: 3;
+}
+
+#character-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 #dialogue {
@@ -148,13 +172,12 @@ body {
   color: var(--secondary-text-color);
 }
 
-/* timer bar container is the full width track */
-#timer-bar-container {
-  width: 400px; /* shorter than full width, change to taste */
-  height: 12px; /* bigger/thicker bar */
+#dialogue #timer-bar-container {
+  width: 400px;
+  height: 12px;
   background: rgba(255, 180, 200, 0.4);
   border-radius: 6px;
-  margin: 10px auto; /* auto centres it horizontally in the textbox */
+  margin: 10px auto;
   display: none; /* hidden until JS needs it */
 }
 
@@ -167,30 +190,26 @@ body {
   transition: width linear;
 }
 
-#next-button {
-  display: none; /* hidden until JS needs it */
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-}
-
 #choices {
   display: flex;
-  gap: 10px;
-  color: #393939;
+  gap: 50px;
+  bottom: 10px;
+  justify-content: center; /* centres buttons horizontally */
 }
 
 .choice-button {
-  padding: 8px 20px;
+  font-size: 1.3rem;
+  font-weight: 300px;
+  padding: 10px 20px;
   cursor: pointer;
   background: linear-gradient(
     to right,
     var(--secondary-bg-color) 10%,
-    #e4667d 100%
+    #e4667d 90%
   );
+  box-shadow: 5px 5px 10px var(--shadow-color);
+  color: var(--primary-text-color);
   border: none;
-  font-size: 14px;
   border-radius: 8px;
 }
 
@@ -200,8 +219,8 @@ body {
 }
 
 #credits-text {
-  color: white;
-  font-size: 16px;
+  color: var(--primary-text-color);
+  font-size: 1.2rem;
   text-align: center;
   line-height: 2;
 }

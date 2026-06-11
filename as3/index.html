@@ -19,7 +19,7 @@
     <div id="start-screen">
       <img id="start-bg" src="home-bg.png" alt="background" />
       <div id="title-container">
-        <img id="title" src="test-title.png" alt="title" />
+        <img id="title" src="title.png" alt="title" />
         <button id="start-button">START</button>
       </div>
     </div>
@@ -31,13 +31,13 @@
       <img id="cg-art" src="cg.png" alt="cg" />
       <!-- CG art shown at end scene, hidden by default -->
       <div id="textbox">
+        <p id="character-name">MAGICAL GIRL</p>
         <p id="dialogue"></p>
         <div id="timer-bar-container">
           <!-- wraps timer bar for styling -->
           <div id="timer-bar"></div>
           <!-- shrinks via JS to show countdown visually -->
         </div>
-        <button id="next-button">▶</button>
         <div id="choices"></div>
       </div>
     </div>
@@ -58,11 +58,11 @@
       <img id="restart-bg" src="home-bg.png" alt="" />
       <!-- same bg as start screen -->
       <div class="title-container">
-        <img id="restart-title" src="test-title.png" alt="" />
+        <!-- changing to a class here to avoid them being the same name -->
+        <img id="restart-title" src="title.png" alt="" />
         <button id="restart-button">START</button>
         <button id="extra-button">EXTRAS</button>
         <button id="credits-button">CREDITS</button>
-        <!-- reveals extra content -->
       </div>
       <div>
         <img id="unlocked-art" src="test-sprite.png" alt="" />
