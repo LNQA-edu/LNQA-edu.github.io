@@ -1,5 +1,5 @@
 // holds timer references so they can be cancelled if player clicks in time
-let autoTimer;
+let autoTimer = null;
 let countdownInterval;
 
 // --- DATA: SCENES ---
@@ -173,13 +173,13 @@ const scenes = {
     lines: [
       { text: "It doesn't matter anyway.", sprite: "neutral-sprite.png" },
       { text: "Nothing matters, not anymore.", sprite: "angry-sprite.png" },
-      { text: "Come on now.", cg: "test-sprite.png" },
+      { text: "Come on now.", cg: "cg-art.png" },
       {
         text: "Let us defeat evil, in the name of Justice.",
-        cg: "test-sprite.png",
+        cg: "cg-art.png",
       },
     ],
-    choices: [], // no choices, click next to go to credits
+    choices: [],
   },
 };
 
@@ -228,6 +228,7 @@ function showScene(sceneId) {
         cgArt.src = line.cg;
         cgArt.style.display = "block";
         sprite.style.display = "none";
+        freshTextbox.classList.add("cg-mode");
       }
 
       lineIndex++;
@@ -238,6 +239,7 @@ function showScene(sceneId) {
       const freshTimerBar = freshTextbox.querySelector("#timer-bar");
 
       if (line.hideBox) {
+        freshDialogue.textContent = ""; // clear text before hiding
         freshTextbox.style.display = "none"; // hide after rendering the line
         document.addEventListener(
           "click",
@@ -355,12 +357,17 @@ document
 // --- EXTRA BUTTON ---
 // on restart screen, clicking extra opens the unlocked art popup
 document.getElementById("extra-button").addEventListener("click", function () {
-  document.getElementById("art-popup").style.display = "flex";
+  document.getElementById("extras-popup").style.display = "flex";
 });
 
-// --- CLOSE POPUP ---
-document.getElementById("close-popup").addEventListener("click", function () {
-  document.getElementById("art-popup").style.display = "none";
+document.getElementById("close-extras").addEventListener("click", function () {
+  document.getElementById("extras-popup").style.display = "none";
 });
 
-/* Well this was horrifying to code, haha. */
+// --- CREDITS BUTTON ---
+// on restart screen, clicking credits goes to credits screen
+document
+  .getElementById("credits-button")
+  .addEventListener("click", function () {
+    switchScreen("restart-screen", "credits-screen");
+  });

@@ -21,10 +21,10 @@ body {
   flex-direction: column;
   align-items: center;
   /* centers everything */
-  gap: 10px;
+  gap: 15px;
   position: absolute; /* place stuff anywhere on screen */
-  left: 8%; /* distance from left edge */
-  top: 0%; /* distance from top edge */
+  left: 11%; /* distance from left edge */
+  top: 4%; /* distance from top edge */
   z-index: 1;
 }
 
@@ -40,6 +40,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden; /* prevents cover art from causing horizontal scroll */
 }
 
 /* images fill behind everything */
@@ -56,13 +57,13 @@ body {
 #restart-title {
   position: relative;
   z-index: 1;
-  width: 650px;
+  width: 600px;
   left: 0%;
 }
 
 #start-button,
 #restart-button {
-  font-size: 1.8rem;
+  font-size: 2rem;
   padding: 10px 20px;
   background: linear-gradient(
     to right,
@@ -73,6 +74,7 @@ body {
   border: none;
   box-shadow: 5px 5px 10px var(--shadow-color);
   color: var(--primary-text-color);
+  margin-top: 40px;
 }
 
 #start-button:hover,
@@ -93,6 +95,26 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
+}
+
+.start-advice {
+  position: absolute;
+  bottom: -12%;
+  color: var(--secondary-text-color);
+  font-size: 1rem;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+#start-cover,
+#restart-cover {
+  position: absolute;
+  bottom: 0;
+  left: 0; /* anchor points */
+  max-height: 95%; /* only change this for size */
+  width: auto;
+  transform: translateX(35%); /* only change this to move left/right */
+  z-index: 1;
 }
 
 #extra-button,
@@ -138,7 +160,7 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  height: 700px; /* change this number until it looks right */
+  height: auto; /* change this number until it looks right */
   width: auto;
   z-index: 2;
 }
@@ -146,7 +168,7 @@ body {
 /* textbox sits at bottom above sprite */
 #textbox {
   position: absolute;
-  bottom: 30px; /* lifts it slightly off the bottom edge */
+  bottom: 40px; /* lifts it slightly off the bottom edge */
   left: 50%;
   transform: translateX(-50%); /* centres it horizontally */
   width: 70%; /* matches that contained width in the preview */
@@ -155,6 +177,16 @@ body {
   padding: 20px;
   border-radius: 10px;
   z-index: 3;
+}
+
+#textbox.cg-mode {
+  background: rgba(255, 237, 241, 0.8);
+  /* using color code cause var would not work... */
+}
+
+#textbox.cg-mode #character-name,
+#textbox.cg-mode #dialogue {
+  color: var(--secondary-text-color);
 }
 
 #character-name {
@@ -198,7 +230,7 @@ body {
 }
 
 .choice-button {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 300px;
   padding: 10px 20px;
   cursor: pointer;
@@ -255,8 +287,51 @@ body {
   gap: 10px;
 }
 
-#unlocked-art {
-  width: 700px;
+#game-screen {
+  max-width: 1920px;
+  max-height: 1080px;
+  margin: 0 auto;
+}
+
+#extras-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#extras-box {
+  background: var(--primary-bg-color);
+  border: solid 7px var(--secondary-bg-color);
+  border-radius: 20px;
+  width: 400px;
+  height: 300px;
+  display: flex; /* centres text inside box */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--secondary-text-color);
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 40px;
+}
+
+#close-extras {
+  position: absolute;
+  padding: 10px 10px;
+  top: 5px;
+  right: 15px; /* top right corner */
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--secondary-bg-color);
 }
 
 /* The total of customized assets in this project is:

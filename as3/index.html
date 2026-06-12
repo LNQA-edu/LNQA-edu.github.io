@@ -21,14 +21,18 @@
       <div id="title-container">
         <img id="title" src="title.png" alt="title" />
         <button id="start-button">START</button>
+        <p class="start-advice">
+          press F11 to go fullscreen for best experience!
+        </p>
       </div>
+      <img id="start-cover" src="start-cover.png" alt="" />
     </div>
 
     <!-- GAME SCREEN: hidden on load, revealed when start button is clicked -->
     <div id="game-screen" style="display: none">
       <img id="background" src="light-bg.png" alt="bg" />
-      <img id="sprite" src="test-sprite.png" alt="sprite" />
-      <img id="cg-art" src="cg.png" alt="cg" />
+      <img id="sprite" src="neutral-sprite.png" alt="sprite" />
+      <img id="cg-art" src="cg-art.png" alt="cg" />
       <!-- CG art shown at end scene, hidden by default -->
       <div id="textbox">
         <p id="character-name">MAGICAL GIRL</p>
@@ -65,7 +69,15 @@
         <button id="credits-button">CREDITS</button>
       </div>
       <div>
-        <img id="unlocked-art" src="unlocked-art.png" alt="" />
+        <img id="restart-cover" src="restart-cover.png" alt="" />
+      </div>
+
+      <!-- EXTRAS POPUP: fixed overlay, outside all screens -->
+      <div id="extras-popup" style="display: none">
+        <div id="extras-box">
+          <button id="close-extras">x</button>
+          <p>Her sister's name is Justice. All Magical Girls are Justice.</p>
+        </div>
       </div>
     </div>
   </body>
