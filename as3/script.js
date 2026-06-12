@@ -155,7 +155,7 @@ const scenes = {
       { text: "YES", next: "end" }, // both choices lead same place *<:^)
     ],
     timed: true, // triggers countdown when choices appear
-    timer: 5, // seconds before auto-selecting
+    timer: 3, // seconds before auto-selecting
   },
   end_forced: {
     background: "dark-bg.png",
@@ -197,6 +197,7 @@ const textbox = document.getElementById("textbox");
 // --- SHOW SCENE ---
 // loads a scene by id, renders first line, sets up textbox click to advance
 function showScene(sceneId) {
+  clearTimeout(autoTimer); // cancel any running timer immediately when new scene loads
   const scene = scenes[sceneId];
   background.src = scene.background;
   cgArt.style.display = "none";
@@ -207,6 +208,10 @@ function showScene(sceneId) {
   const freshTextbox = document.getElementById("textbox");
   const freshChoices = freshTextbox.querySelector("#choices");
   const freshDialogue = freshTextbox.querySelector("#dialogue");
+  const freshTimerContainer = freshTextbox.querySelector(
+    "#timer-bar-container",
+  );
+  const freshTimerBar = freshTextbox.querySelector("#timer-bar");
   freshTextbox.style.display = "block";
   freshChoices.innerHTML = "";
 
@@ -246,7 +251,13 @@ function showScene(sceneId) {
     } else {
       freshDialogue.textContent = freshDialogue.textContent.replace(" ▶", "");
       freshChoices.innerHTML = "";
-      showChoices(scene, freshTextbox, freshChoices);
+      showChoices(
+        scene,
+        freshTextbox,
+        freshChoices,
+        freshTimerContainer,
+        freshTimerBar,
+      );
     }
   }
 
@@ -262,10 +273,13 @@ function showScene(sceneId) {
 
 // --- SHOW CHOICES ---
 // renders choice buttons, handles timed scenes and empty choice scenes
-function showChoices(scene, currentTextbox, currentChoicesDiv) {
-  const freshTimerContainer = document.getElementById("timer-bar-container");
-  const freshTimerBar = document.getElementById("timer-bar");
-
+function showChoices(
+  scene,
+  currentTextbox,
+  currentChoicesDiv,
+  freshTimerContainer,
+  freshTimerBar,
+) {
   if (!scene.choices || scene.choices.length === 0) {
     currentTextbox.addEventListener("click", function handler() {
       currentTextbox.removeEventListener("click", handler);
@@ -281,26 +295,26 @@ function showChoices(scene, currentTextbox, currentChoicesDiv) {
     btn.addEventListener("click", function () {
       clearTimeout(autoTimer);
       clearInterval(countdownInterval);
-      freshTimerContainer.style.display = "none"; // fixed
-      freshTimerBar.style.width = "100%"; // fixed
+      freshTimerContainer.style.display = "none";
+      freshTimerBar.style.width = "100%";
       showScene(choice.next);
     });
     currentChoicesDiv.appendChild(btn);
   });
 
   if (scene.timed) {
-    freshTimerContainer.style.display = "block"; // fixed
-    freshTimerBar.style.transition = `width ${scene.timer}s linear`; // fixed
-    freshTimerBar.style.width = "100%"; // fixed
+    freshTimerContainer.style.display = "block";
+    freshTimerBar.style.transition = `width ${scene.timer}s linear`;
+    freshTimerBar.style.width = "100%";
 
     setTimeout(function () {
-      freshTimerBar.style.width = "0%"; // fixed
+      freshTimerBar.style.width = "0%";
     }, 50);
 
     autoTimer = setTimeout(function () {
       clearInterval(countdownInterval);
-      freshTimerContainer.style.display = "none"; // fixed
-      freshTimerBar.style.width = "100%"; // fixed
+      freshTimerContainer.style.display = "none";
+      freshTimerBar.style.width = "100%";
       currentChoicesDiv.innerHTML = "";
       showScene("end_forced");
     }, scene.timer * 1000);
