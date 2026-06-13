@@ -314,6 +314,10 @@ body {
   color: var(--secondary-bg-color);
 }
 
+#close-extras:hover {
+  scale: 0.95;
+}
+
 /* ANIMATION */
 /* bounce sprite start screen */
 @keyframes bounce {
