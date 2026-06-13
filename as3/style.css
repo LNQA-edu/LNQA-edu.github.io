@@ -13,6 +13,7 @@ body {
   font-weight: 550;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+  overflow: hidden;
 }
 
 #title-container,
@@ -143,17 +144,6 @@ body {
   z-index: 0;
 }
 
-/* cg art fills screen above background but behind textbox */
-#cg-art {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  display: none;
-  /* hidden until end scene triggers it */
-}
-
 /* sprite anchored to bottom center above background */
 #sprite {
   position: absolute;
@@ -177,16 +167,6 @@ body {
   padding: 20px;
   border-radius: 10px;
   z-index: 3;
-}
-
-#textbox.cg-mode {
-  background: rgba(255, 237, 241, 0.8);
-  /* using color code cause var would not work... */
-}
-
-#textbox.cg-mode #character-name,
-#textbox.cg-mode #dialogue {
-  color: var(--secondary-text-color);
 }
 
 #character-name {
@@ -332,6 +312,86 @@ body {
   font-size: 2.5rem;
   cursor: pointer;
   color: var(--secondary-bg-color);
+}
+
+/* ANIMATION */
+/* bounce sprite start screen */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+.bounce {
+  animation: bounce 0.2s ease;
+}
+
+/* screen shakes violently after hideBox */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-20px);
+  }
+  30% {
+    transform: translateX(20px);
+  }
+  45% {
+    transform: translateX(-15px);
+  }
+  60% {
+    transform: translateX(15px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  90% {
+    transform: translateX(10px);
+  }
+}
+
+.shake {
+  animation: shake 0.2s ease; /* longer = more dramatic */
+}
+
+/* shivering YES choices */
+@keyframes shiver {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, -1px);
+  }
+  50% {
+    transform: translate(2px, 1px);
+  }
+  75% {
+    transform: translate(-1px, 2px);
+  }
+}
+
+.shiver {
+  animation: shiver 0.1s ease infinite;
+}
+
+/* cg art fills screen above background but behind textbox */
+#cg-art {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: none;
+  /* hidden until end scene triggers it */
+  transition: opacity 1s ease;
+  /* transition from sprite art to cg art, animation done in js */
 }
 
 /* The total of customized assets in this project is:

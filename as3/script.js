@@ -7,14 +7,15 @@ const scenes = {
   start: {
     background: "light-bg.png",
     lines: [
-      // {
-      //   text: "Hello, it's good to finally meet you.",
-      //   sprite: "neutral-sprite.png",
-      // },
-      // {
-      //   text: "Oh you are adorable! I'm glad it's you who is aiding me.",
-      //   sprite: "happy-sprite.png",
-      // },
+      //   {
+      //     text: "Hello, it's good to finally meet you.",
+      //     sprite: "neutral-sprite.png",
+      //   },
+      //   {
+      //     text: "Oh you are adorable! I'm glad it's you who is aiding me.",
+      //     sprite: "happy-sprite.png",
+      //     bounce: true,
+      //   },
       {
         text: "Let's save the world together by defeating evil, in the name of justice.",
         sprite: "happy-sprite.png",
@@ -155,7 +156,7 @@ const scenes = {
       { text: "YES", next: "end" }, // both choices lead same place *<:^)
     ],
     timed: true, // triggers countdown when choices appear
-    timer: 3, // seconds before auto-selecting
+    timer: 2, // seconds before auto-selecting
   },
   end_forced: {
     background: "dark-bg.png",
@@ -196,12 +197,16 @@ const textbox = document.getElementById("textbox");
 
 // --- SHOW SCENE ---
 // loads a scene by id, renders first line, sets up textbox click to advance
+
 function showScene(sceneId) {
-  clearTimeout(autoTimer); // cancel any running timer immediately when new scene loads
+  clearTimeout(autoTimer);
+  autoTimer = null;
   const scene = scenes[sceneId];
   background.src = scene.background;
+  cgArt.style.opacity = "0";
   cgArt.style.display = "none";
   cgArt.src = "";
+  sprite.style.display = "block";
 
   const currentTextboxEl = document.getElementById("textbox");
   currentTextboxEl.replaceWith(currentTextboxEl.cloneNode(true));
@@ -216,39 +221,56 @@ function showScene(sceneId) {
   freshChoices.innerHTML = "";
 
   let lineIndex = 0;
+  let isAdvancing = false; // prevents double-firing on click
 
   function showLine() {
+    if (isAdvancing) return; // block if already moving
+
     if (lineIndex < scene.lines.length) {
       const line = scene.lines[lineIndex];
       freshDialogue.textContent = line.text + " ▶";
+
       if (line.sprite) sprite.src = line.sprite;
+
+      if (line.bounce) {
+        sprite.classList.add("bounce");
+      } else {
+        sprite.classList.remove("bounce");
+      }
+
       if (line.background) background.src = line.background;
 
       if (line.cg) {
         cgArt.src = line.cg;
+        cgArt.style.opacity = "0";
         cgArt.style.display = "block";
+        setTimeout(function () {
+          cgArt.style.opacity = "1";
+        }, 50);
         sprite.style.display = "none";
-        freshTextbox.classList.add("cg-mode");
+        freshTextbox.style.background = "rgba(255, 237, 241, 0.8)";
       }
 
-      lineIndex++;
       freshChoices.innerHTML = "";
-      const freshTimerContainer = freshTextbox.querySelector(
-        "#timer-bar-container",
-      );
-      const freshTimerBar = freshTextbox.querySelector("#timer-bar");
 
       if (line.hideBox) {
-        freshDialogue.textContent = ""; // clear text before hiding
-        freshTextbox.style.display = "none"; // hide after rendering the line
+        freshDialogue.textContent = "";
+        freshTextbox.style.display = "none";
+        document.getElementById("game-screen").classList.add("shake");
+        setTimeout(function () {
+          document.getElementById("game-screen").classList.remove("shake");
+        }, 500);
         document.addEventListener(
           "click",
           function revealBox() {
-            freshTextbox.style.display = "block"; // click anywhere to reveal
+            lineIndex++;
+            freshTextbox.style.display = "block";
             document.removeEventListener("click", revealBox);
           },
           { once: true, capture: true },
-        ); // capture:true fires before textbox listener
+        );
+      } else {
+        lineIndex++;
       }
     } else {
       freshDialogue.textContent = freshDialogue.textContent.replace(" ▶", "");
@@ -283,37 +305,26 @@ function showChoices(
   freshTimerBar,
 ) {
   if (!scene.choices || scene.choices.length === 0) {
+    let advancing = false; // prevents double-firing
     currentTextbox.addEventListener("click", function handler() {
+      if (advancing) return;
+      advancing = true;
       currentTextbox.removeEventListener("click", handler);
       scene.nextScene ? showScene(scene.nextScene) : showCredits();
     });
     return;
   }
 
-  scene.choices.forEach(function (choice) {
-    const btn = document.createElement("button");
-    btn.textContent = choice.text;
-    btn.className = "choice-button";
-    btn.addEventListener("click", function () {
-      clearTimeout(autoTimer);
-      clearInterval(countdownInterval);
-      freshTimerContainer.style.display = "none";
-      freshTimerBar.style.width = "100%";
-      showScene(choice.next);
-    });
-    currentChoicesDiv.appendChild(btn);
-  });
-
+  // timer assigned first before buttons are created
   if (scene.timed) {
     freshTimerContainer.style.display = "block";
     freshTimerBar.style.transition = `width ${scene.timer}s linear`;
     freshTimerBar.style.width = "100%";
-
     setTimeout(function () {
       freshTimerBar.style.width = "0%";
     }, 50);
-
     autoTimer = setTimeout(function () {
+      if (autoTimer === null) return; // cancelled by button click, do nothing
       clearInterval(countdownInterval);
       freshTimerContainer.style.display = "none";
       freshTimerBar.style.width = "100%";
@@ -321,6 +332,24 @@ function showChoices(
       showScene("end_forced");
     }, scene.timer * 1000);
   }
+
+  // buttons created after timer is set
+  scene.choices.forEach(function (choice) {
+    const btn = document.createElement("button");
+    btn.textContent = choice.text;
+    btn.className = "choice-button";
+    if (scene.timed) btn.classList.add("shiver"); // shiver on timed scenes
+    btn.addEventListener("click", function () {
+      const timerToClear = autoTimer; // capture timer reference
+      autoTimer = null; // null before clearing
+      clearTimeout(timerToClear); // clear captured reference
+      clearInterval(countdownInterval);
+      freshTimerContainer.style.display = "none";
+      freshTimerBar.style.width = "100%";
+      showScene(choice.next);
+    });
+    currentChoicesDiv.appendChild(btn);
+  });
 }
 
 // --- SCREEN TRANSITIONS ---
