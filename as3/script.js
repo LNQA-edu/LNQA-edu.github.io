@@ -1,11 +1,15 @@
+// 1. DATA DEFINING
+// Timer bar
 let autoTimer = null;
+// null: intendedly absent element
 let countdownInterval;
-let textboxClickHandler = null; // tracks active click handler for cleanup
+let textboxClickHandler = null;
+// tracks active click handler for cleanup (hide textbox)
 
-// --- DATA: AUDIOS ---
+// Audios
 let bgm, darkBgm, laughSfx, gameSfx, otherSfx;
 
-// --- DATA: SCENES ---
+// Scenes
 const scenes = {
   start: {
     background: "light-bg.png",
@@ -202,7 +206,7 @@ const scenes = {
   },
 };
 
-// GRAB ELEMENTS
+// 2. GET DOM ELEMENTS
 const background = document.getElementById("background");
 const sprite = document.getElementById("sprite");
 const cgArt = document.getElementById("cg-art");
@@ -212,7 +216,7 @@ const choices = document.getElementById("choices");
 const timerBarContainer = document.getElementById("timer-bar-container");
 const timerBar = document.getElementById("timer-bar");
 
-// --- SHOW SCENE ---
+// 3. WRITE FUNCTIONS
 // resets state and loads a new scene
 function showScene(sceneId) {
   clearTimeout(autoTimer);
@@ -323,7 +327,6 @@ function showScene(sceneId) {
   showLine(); // show first line immediately
 }
 
-// --- SHOW CHOICES ---
 // renders choice buttons and handles timed scenes
 function showChoices(scene) {
   if (!scene.choices || scene.choices.length === 0) {
@@ -359,6 +362,42 @@ function showChoices(scene) {
     }, scene.timer * 1000);
   }
 
+  // 4. ADD EVENT LISTENERS
+  // audio created inside click so file.garden loads without being blocked
+  document
+    .getElementById("start-button")
+    .addEventListener("click", function () {
+      bgm = new Audio(
+        "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3",
+      );
+      bgm.loop = true;
+      bgm.volume = 0.1;
+
+      darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
+      darkBgm.loop = true;
+      darkBgm.volume = 0.1;
+
+      laughSfx = new Audio(
+        "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3",
+      );
+      laughSfx.volume = 0.15;
+
+      gameSfx = new Audio(
+        "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
+      );
+      gameSfx.volume = 0.5;
+
+      otherSfx = new Audio(
+        "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
+      );
+      otherSfx.volume = 0.5;
+
+      gameSfx.play();
+      bgm.play();
+      switchScreen("start-screen", "game-screen");
+      showScene("start");
+    });
+
   // CHOICES BUTTON
   scene.choices.forEach(function (choice) {
     const btn = document.createElement("button");
@@ -379,14 +418,14 @@ function showChoices(scene) {
   });
 }
 
-// --- SCREEN TRANSITIONS ---
+// SCREEN TRANSITIONS
 // hides one screen and reveals another
 function switchScreen(hideId, showId) {
   document.getElementById(hideId).style.display = "none";
   document.getElementById(showId).style.display = "flex";
 }
 
-// --- CREDITS ---
+// CREDITS PAGE
 // shows credits screen and resets sprite visibility
 function showCredits() {
   darkBgm.pause();
@@ -399,48 +438,14 @@ function showCredits() {
   sprite.style.display = "block";
 }
 
-// --- START BUTTON ---
-// audio created inside click so file.garden loads without being blocked
-document.getElementById("start-button").addEventListener("click", function () {
-  bgm = new Audio(
-    "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3",
-  );
-  bgm.loop = true;
-  bgm.volume = 0.2;
-
-  darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
-  darkBgm.loop = true;
-  darkBgm.volume = 0.1;
-
-  laughSfx = new Audio(
-    "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3",
-  );
-  laughSfx.volume = 0.15;
-
-  gameSfx = new Audio(
-    "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
-  );
-  gameSfx.volume = 0.5;
-
-  otherSfx = new Audio(
-    "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
-  );
-  otherSfx.volume = 0.5;
-
-  gameSfx.play();
-  bgm.play();
-  switchScreen("start-screen", "game-screen");
-  showScene("start");
-});
-
-// --- MAIN MENU BUTTON ---
+// MAIN MENU BUTTON
 document.getElementById("menu-button").addEventListener("click", function () {
   otherSfx.currentTime = 0;
   otherSfx.play();
   switchScreen("credits-screen", "restart-screen");
 });
 
-// --- RESTART BUTTON ---
+// RESTART BUTTON
 document
   .getElementById("restart-button")
   .addEventListener("click", function () {
@@ -454,21 +459,21 @@ document
     showScene("start");
   });
 
-// --- EXTRA BUTTON ---
+// EXTRA BUTTON
 document.getElementById("extra-button").addEventListener("click", function () {
   otherSfx.currentTime = 0;
   otherSfx.play();
   document.getElementById("extras-popup").style.display = "flex";
 });
 
-// --- CLOSE EXTRAS ---
+// CLOSE EXTRAS
 document.getElementById("close-extras").addEventListener("click", function () {
   otherSfx.currentTime = 0;
   otherSfx.play();
   document.getElementById("extras-popup").style.display = "none";
 });
 
-// --- CREDITS BUTTON ---
+// CREDITS BUTTON
 document
   .getElementById("credits-button")
   .addEventListener("click", function () {

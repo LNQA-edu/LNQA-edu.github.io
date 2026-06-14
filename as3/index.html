@@ -28,25 +28,24 @@
       <img id="start-cover" src="start-cover.png" alt="" />
     </div>
 
-    <!-- GAME SCREEN: hidden on load, revealed when start button is clicked -->
+    <!-- GAME SCREEN -->
     <div id="game-screen" style="display: none">
+      <!-- display:none hides content until they need to be visible -->
       <img id="background" src="light-bg.png" alt="bg" />
       <img id="sprite" src="neutral-sprite.png" alt="sprite" />
       <img id="cg-art" src="cg-art.png" alt="cg" />
-      <!-- CG art shown at end scene, hidden by default -->
       <div id="textbox">
-        <p id="character-name">MAGICAL GIRL</p>
+        <p id="character-name">Magical Girl</p>
         <p id="dialogue"></p>
         <div id="timer-bar-container">
-          <!-- wraps timer bar for styling -->
           <div id="timer-bar"></div>
-          <!-- shrinks via JS to show countdown visually -->
+          <!-- in js, this bar shrinks down, signal a timed choice -->
         </div>
         <div id="choices"></div>
       </div>
     </div>
 
-    <!-- CREDITS SCREEN: hidden until end dialogue finishes -->
+    <!-- CREDITS SCREEN -->
     <div id="credits-screen" style="display: none">
       <p id="credits-text">
         CREDITS <br />
@@ -66,18 +65,17 @@
           >lucadialessandro</a
         >
         <br />Sprite & CG Arts: Abbey <br />Assets: An <br />Programmer: An
-        <!-- no link to keep abbey and an's privacy!!! -->
+        <!-- no link to keep abbey and an's privacy!! -->
       </p>
       <button id="menu-button">Main Menu</button>
-      <!-- returns to end screen after credits -->
     </div>
 
-    <!-- RESTART SCREEN: hidden until main menu is clicked from credits -->
+    <!-- RESTART SCREEN -->
+    <!-- was this game have more production force i would love to try making different menus based on different endings you get -->
     <div id="restart-screen" style="display: none">
       <img id="restart-bg" src="home-dark.png" alt="" />
-      <!-- same bg as start screen -->
       <div class="title-container">
-        <!-- changing to a class here to avoid them being the same name -->
+        <!-- changing to a class here to avoid them being the same name, in case i wanna restyle a specific element in the future -->
         <img id="restart-title" src="title.png" alt="" />
         <button id="restart-button">START</button>
         <button id="extra-button">EXTRAS</button>
@@ -92,6 +90,7 @@
     <div id="extras-popup" style="display: none">
       <div id="extras-box">
         <button id="close-extras">x</button>
+        <!-- i chose fredoka font one large part because i could just use keyboard letters and dont have to outsource for the close button... -->
         <p>Her sister's name is Justice. All Magical Girls are Justice.</p>
       </div>
     </div>
@@ -121,6 +120,7 @@ It is both exciting and antagonizing to be a feminine figure with conflicts of w
 
 I think what I was trying to achieve the most, visually, is how far can I push a darker topic within academic comport.
 And from there trying to find elevation points within coding, such as in-game mechanisms or through other medias like sounds or timing events. 
-Proclaiming, sprite art and CG art was done with the help of Abbey, but the writing, programming, concept art, other assets, and overall design was all done by me.
+Proclaiming, sprite art and CG art was done with the help of Abbey, but the writing, programming, character's concept art, other assets, and overall design was all done by me.
 Overall, this project was very useful in understanding basic coding languages, and learning more of design communicating between users and designers!
+I acknowledge my academic shortcomings on the inability to add a mute/unmute button, go-back prev dialogue button and better styling of choice buttons due to time constraints. 
 -->
