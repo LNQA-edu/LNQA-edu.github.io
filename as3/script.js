@@ -279,7 +279,7 @@ function showScene(sceneId) {
 
     if (line.cg) {
       if (cgArt.style.display === "none") {
-        // only fires on first cg line
+        // only runs on first cg line
         laughSfx.currentTime = 0;
         laughSfx.play();
       }
@@ -290,7 +290,7 @@ function showScene(sceneId) {
         cgArt.style.opacity = "1";
       }, 50);
       sprite.style.display = "none";
-      textbox.style.background = "rgba(255, 237, 241, 0.8)"; // transparent for cg scenes
+      textbox.style.background = "rgba(255, 237, 241, 0.8)"; // semi-transparent to showcase cg art
     }
 
     choices.innerHTML = "";
@@ -345,6 +345,7 @@ function showChoices(scene) {
   }
 
   // set timer BEFORE creating buttons
+  // timed choices to create tension
   if (scene.timed) {
     timerBarContainer.style.display = "block";
     timerBar.style.transition = `width ${scene.timer}s linear`;
@@ -354,7 +355,8 @@ function showChoices(scene) {
     }, 50);
 
     autoTimer = setTimeout(function () {
-      if (autoTimer === null) return; // player clicked in time, do nothing
+      if (autoTimer === null) return;
+      // player clicked in time then it would do nothing
       timerBarContainer.style.display = "none";
       timerBar.style.width = "100%";
       choices.innerHTML = "";
@@ -362,42 +364,7 @@ function showChoices(scene) {
     }, scene.timer * 1000);
   }
 
-  // 4. ADD EVENT LISTENERS
-  // audio created inside click so file.garden loads without being blocked
-  document
-    .getElementById("start-button")
-    .addEventListener("click", function () {
-      bgm = new Audio(
-        "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3",
-      );
-      bgm.loop = true;
-      bgm.volume = 0.1;
-
-      darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
-      darkBgm.loop = true;
-      darkBgm.volume = 0.1;
-
-      laughSfx = new Audio(
-        "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3",
-      );
-      laughSfx.volume = 0.15;
-
-      gameSfx = new Audio(
-        "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
-      );
-      gameSfx.volume = 0.5;
-
-      otherSfx = new Audio(
-        "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
-      );
-      otherSfx.volume = 0.5;
-
-      gameSfx.play();
-      bgm.play();
-      switchScreen("start-screen", "game-screen");
-      showScene("start");
-    });
-
+  //  THE CORRECTION: The choices loop belongs INSIDE the function here!
   // CHOICES BUTTON
   scene.choices.forEach(function (choice) {
     const btn = document.createElement("button");
@@ -416,7 +383,7 @@ function showChoices(scene) {
     });
     choices.appendChild(btn);
   });
-}
+} // This curly bracket cleanly finishes showChoices
 
 // SCREEN TRANSITIONS
 // hides one screen and reveals another
@@ -431,17 +398,59 @@ function showCredits() {
   darkBgm.pause();
   darkBgm.currentTime = 0;
   if (textboxClickHandler) {
-    textbox.removeEventListener("click", textboxClickHandler); // clean up listener before leaving
+    textbox.removeEventListener("click", textboxClickHandler);
+    // clean up listener before leaving
     textboxClickHandler = null;
   }
   switchScreen("game-screen", "credits-screen");
   sprite.style.display = "block";
 }
 
+// 4. ADD EVENT LISTENERS
+// audio created inside click so audios loads without being blocked
+document.getElementById("start-button").addEventListener("click", function () {
+  // happy bgm
+  bgm = new Audio(
+    "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3",
+  );
+  bgm.loop = true;
+  bgm.volume = 0.1;
+
+  // creepy bg,
+  darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
+  darkBgm.loop = true;
+  darkBgm.volume = 0.1;
+
+  // very pretty laughter <3
+  laughSfx = new Audio(
+    "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3",
+  );
+  laughSfx.volume = 0.15;
+
+  // pink buttons's sound
+  gameSfx = new Audio(
+    "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
+  );
+  gameSfx.volume = 0.5;
+
+  // not pink buttons's sound
+  otherSfx = new Audio(
+    "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
+  );
+  otherSfx.volume = 0.5;
+
+  // plays happy music at beginning of game
+  gameSfx.play();
+  bgm.play();
+  switchScreen("start-screen", "game-screen");
+  showScene("start");
+});
+
 // MAIN MENU BUTTON
 document.getElementById("menu-button").addEventListener("click", function () {
   otherSfx.currentTime = 0;
   otherSfx.play();
+  // play sfx of the button on click action
   switchScreen("credits-screen", "restart-screen");
 });
 
@@ -455,6 +464,8 @@ document
     darkBgm.currentTime = 0;
     bgm.currentTime = 0;
     bgm.play();
+    background.src = "light-bg.png";
+    // Reset the background image back to the start state
     switchScreen("restart-screen", "game-screen");
     showScene("start");
   });
@@ -471,6 +482,7 @@ document.getElementById("close-extras").addEventListener("click", function () {
   otherSfx.currentTime = 0;
   otherSfx.play();
   document.getElementById("extras-popup").style.display = "none";
+  // display:none so popup disappear when button is clicked
 });
 
 // CREDITS BUTTON
@@ -481,3 +493,12 @@ document
     otherSfx.play();
     switchScreen("restart-screen", "credits-screen");
   });
+
+/* I ackowledge my academic shortcomings regarding coding. 
+  I think as I was too immersed in writing and visual designing that my coding skills might be quite underperformed, 
+  combining with some personal matters on time constrains and skill shortcoming on coding, 
+  that gives me less chances to practice iterations on creative coding.
+  Although, I appreciated this assignment given me some insights on cued functions 
+  (buttons that comes with audios, scenes and assets rendering on clicks) 
+  and animations that could be activated either through css or jvs.
+  */
