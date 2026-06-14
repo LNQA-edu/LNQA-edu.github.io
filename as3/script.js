@@ -200,30 +200,42 @@ const scenes = {
 };
 
 // DATA: AUDIOS
-const bgm = new Audio(
-  "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3",
-); // light background music
+const bgm = new Audio("first-bgm.mp3");
+bgm.addEventListener("error", function () {
+  bgm.src =
+    "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3";
+  bgm.play();
+});
 bgm.loop = true;
 bgm.volume = 0.2;
 
-const darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
+const darkBgm = new Audio("second-bgm.mp3");
+darkBgm.addEventListener("error", function () {
+  darkBgm.src = "https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3";
+  darkBgm.play();
+});
 darkBgm.loop = true;
 darkBgm.volume = 0.1;
 
-const laughSfx = new Audio(
-  "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3",
-); // manic laugh when cg art appears
-laughSfx.volume = 0.15;
+const laughSfx = new Audio("manic-laugh.mp3");
+laughSfx.addEventListener("error", function () {
+  laughSfx.src =
+    "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3";
+});
 
-const gameSfx = new Audio(
-  "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
-); // soft click for nav buttons
-gameSfx.volume = 0.5;
+const gameSfx = new Audio("game-buttons.mp3");
+gameSfx.addEventListener("error", function () {
+  gameSfx.src =
+    "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3";
+});
 
-const otherSfx = new Audio(
-  "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
-); // click for choice buttons
-otherSfx.volume = 0.5;
+const otherSfx = new Audio("other-buttons.mp3");
+otherSfx.addEventListener("error", function () {
+  otherSfx.src =
+    "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3";
+});
+// somehow my music and sounds got blocked when im running tests on external browser and on github link so i have to host local and make backups to make sure they run...
+// im lucky theyre all under 10mb
 
 // GRAB ELEMENTS
 const background = document.getElementById("background");
