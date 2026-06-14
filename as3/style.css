@@ -237,6 +237,11 @@ body {
   line-height: 1.5;
 }
 
+#credits-text a {
+  color: var(--primary-text-color); /* white, matches your text colour */
+  text-decoration: underline; /* keeps underline */
+}
+
 #menu-button {
   font-size: 1.5rem;
   margin-top: 20px;

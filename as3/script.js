@@ -143,6 +143,10 @@ const scenes = {
     background: "dark-bg.png",
     lines: [
       {
+        text: "",
+        sprite: "angry-sprite.png",
+      },
+      {
         text: "Actually, you don't have a say in this.",
         sprite: "angry-sprite.png",
       },
@@ -165,6 +169,10 @@ const scenes = {
     background: "dark-bg.png",
     lines: [
       {
+        text: "",
+        sprite: "happy-sprite.png",
+      },
+      {
         text: "They are both the same thing dummy. What is taking you so long then, haha.",
         sprite: "happy-sprite.png",
       },
@@ -175,6 +183,10 @@ const scenes = {
   end: {
     background: "dark-bg.png",
     lines: [
+      {
+        text: "",
+        sprite: "neutral-sprite.png",
+      },
       {
         text: "It doesn't matter what you choose anyways.",
         sprite: "neutral-sprite.png",
@@ -192,19 +204,26 @@ const bgm = new Audio(
   "https://file.garden/afccNF_qMXpg-KIC/geoffharvey-magical-storytime-389087.mp3",
 ); // light background music
 bgm.loop = true;
-bgm.volume = 0.5;
+bgm.volume = 0.2;
 
-const darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3"); // dark background music from scene5
+const darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
 darkBgm.loop = true;
-darkBgm.volume = 0.5;
+darkBgm.volume = 0.1;
 
-const laughSfx = new Audio("laugh.mp3"); // manic laugh when cg art appears
-const clickSfx = new Audio(
-  "https://pixabay.com/sound-effects/technology-start-474092/",
+const laughSfx = new Audio(
+  "https://file.garden/afccNF_qMXpg-KIC/dragon-studio-witch-laugh-401713.mp3",
+); // manic laugh when cg art appears
+laughSfx.volume = 0.15;
+
+const gameSfx = new Audio(
+  "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
 ); // soft click for nav buttons
-const choiceSfx = new Audio(
-  "https://pixabay.com/sound-effects/technology-start-474092/",
+gameSfx.volume = 0.5;
+
+const otherSfx = new Audio(
+  "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
 ); // click for choice buttons
+otherSfx.volume = 0.5;
 
 // GRAB ELEMENTS
 const background = document.getElementById("background");
@@ -231,17 +250,18 @@ function showScene(sceneId) {
   const scene = scenes[sceneId];
 
   // reset visuals
-  background.src = scene.background;
   if (sceneId === "scene5") {
     bgm.pause();
+    bgm.currentTime = 0;
+  }
+  if (sceneId === "end") {
+    bgm.pause();
+    bgm.currentTime = 0;
+    darkBgm.pause();
     darkBgm.currentTime = 0;
     darkBgm.play();
   }
-  if (sceneId === "start") {
-    darkBgm.pause();
-    darkBgm.currentTime = 0;
-    bgm.currentTime = 0;
-  }
+
   sprite.style.display = "block";
   sprite.classList.remove("bounce");
   cgArt.style.opacity = "0";
@@ -277,9 +297,12 @@ function showScene(sceneId) {
     if (line.background) background.src = line.background;
 
     if (line.cg) {
+      if (cgArt.style.display === "none") {
+        // only fires on first cg line
+        laughSfx.currentTime = 0;
+        laughSfx.play();
+      }
       cgArt.src = line.cg;
-      laughSfx.currentTime = 0;
-      laughSfx.play();
       cgArt.style.opacity = "0";
       cgArt.style.display = "block";
       setTimeout(function () {
@@ -359,15 +382,15 @@ function showChoices(scene) {
     }, scene.timer * 1000);
   }
 
-  // create choice buttons after timer is set
+  // CHOICES BUTTON
   scene.choices.forEach(function (choice) {
     const btn = document.createElement("button");
     btn.textContent = choice.text;
     btn.className = "choice-button";
     if (scene.timed) btn.classList.add("shiver"); // shiver animation on timed choices
     btn.addEventListener("click", function () {
-      choiceSfx.currentTime = 0;
-      choiceSfx.play();
+      gameSfx.currentTime = 0;
+      gameSfx.play();
       const timerToClear = autoTimer;
       autoTimer = null;
       clearTimeout(timerToClear);
@@ -401,6 +424,8 @@ function showCredits() {
 
 // --- START BUTTON ---
 document.getElementById("start-button").addEventListener("click", function () {
+  gameSfx.currentTime = 0;
+  gameSfx.play();
   bgm.play();
   switchScreen("start-screen", "game-screen");
   showScene("start");
@@ -408,6 +433,8 @@ document.getElementById("start-button").addEventListener("click", function () {
 
 // --- MAIN MENU BUTTON ---
 document.getElementById("menu-button").addEventListener("click", function () {
+  otherSfx.currentTime = 0;
+  otherSfx.play();
   switchScreen("credits-screen", "restart-screen");
 });
 
@@ -415,21 +442,27 @@ document.getElementById("menu-button").addEventListener("click", function () {
 document
   .getElementById("restart-button")
   .addEventListener("click", function () {
+    gameSfx.currentTime = 0;
+    gameSfx.play();
     darkBgm.pause();
     darkBgm.currentTime = 0;
     bgm.currentTime = 0;
-    bgm.play(); // restart bgm on replay
+    bgm.play();
     switchScreen("restart-screen", "game-screen");
     showScene("start");
   });
 
 // --- EXTRA BUTTON ---
 document.getElementById("extra-button").addEventListener("click", function () {
+  otherSfx.currentTime = 0;
+  otherSfx.play();
   document.getElementById("extras-popup").style.display = "flex";
 });
 
 // --- CLOSE EXTRAS ---
 document.getElementById("close-extras").addEventListener("click", function () {
+  otherSfx.currentTime = 0;
+  otherSfx.play();
   document.getElementById("extras-popup").style.display = "none";
 });
 
@@ -437,5 +470,7 @@ document.getElementById("close-extras").addEventListener("click", function () {
 document
   .getElementById("credits-button")
   .addEventListener("click", function () {
+    otherSfx.currentTime = 0;
+    otherSfx.play();
     switchScreen("restart-screen", "credits-screen");
   });
