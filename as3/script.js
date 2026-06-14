@@ -216,6 +216,28 @@ const choices = document.getElementById("choices");
 const timerBarContainer = document.getElementById("timer-bar-container");
 const timerBar = document.getElementById("timer-bar");
 
+// SCREEN TRANSITIONS
+// hides one screen and reveals another
+function switchScreen(hideId, showId) {
+  document.getElementById(hideId).style.display = "none";
+  document.getElementById(showId).style.display = "flex";
+}
+
+// CREDITS PAGE
+// shows credits screen and resets sprite visibility
+function showCredits() {
+  if (darkBgm) {
+    darkBgm.pause();
+    darkBgm.currentTime = 0;
+  }
+  if (textboxClickHandler) {
+    textbox.removeEventListener("click", textboxClickHandler);
+    textboxClickHandler = null;
+  }
+  switchScreen("game-screen", "credits-screen");
+  sprite.style.display = "block";
+}
+
 // 3. WRITE FUNCTIONS
 // resets state and loads a new scene
 function showScene(sceneId) {
@@ -231,16 +253,20 @@ function showScene(sceneId) {
   const scene = scenes[sceneId];
 
   // reset visuals
-  if (sceneId === "scene5") {
+  if (sceneId === "scene5" && bgm) {
     bgm.pause();
     bgm.currentTime = 0;
   }
   if (sceneId === "end") {
-    bgm.pause();
-    bgm.currentTime = 0;
-    darkBgm.pause();
-    darkBgm.currentTime = 0;
-    darkBgm.play();
+    if (bgm) {
+      bgm.pause();
+      bgm.currentTime = 0;
+    }
+    if (darkBgm) {
+      darkBgm.pause();
+      darkBgm.currentTime = 0;
+      darkBgm.play();
+    }
   }
 
   sprite.style.display = "block";
@@ -278,7 +304,7 @@ function showScene(sceneId) {
     if (line.background) background.src = line.background;
 
     if (line.cg) {
-      if (cgArt.style.display === "none") {
+      if (cgArt.style.display === "none" && laughSfx) {
         // only runs on first cg line
         laughSfx.currentTime = 0;
         laughSfx.play();
@@ -364,16 +390,17 @@ function showChoices(scene) {
     }, scene.timer * 1000);
   }
 
-  //  THE CORRECTION: The choices loop belongs INSIDE the function here!
-  // CHOICES BUTTON
+  // CHOICES BUTTON loop inside function block
   scene.choices.forEach(function (choice) {
     const btn = document.createElement("button");
     btn.textContent = choice.text;
     btn.className = "choice-button";
     if (scene.timed) btn.classList.add("shiver"); // shiver animation on timed choices
     btn.addEventListener("click", function () {
-      gameSfx.currentTime = 0;
-      gameSfx.play();
+      if (gameSfx) {
+        gameSfx.currentTime = 0;
+        gameSfx.play();
+      }
       const timerToClear = autoTimer;
       autoTimer = null;
       clearTimeout(timerToClear);
@@ -383,27 +410,6 @@ function showChoices(scene) {
     });
     choices.appendChild(btn);
   });
-} // This curly bracket cleanly finishes showChoices
-
-// SCREEN TRANSITIONS
-// hides one screen and reveals another
-function switchScreen(hideId, showId) {
-  document.getElementById(hideId).style.display = "none";
-  document.getElementById(showId).style.display = "flex";
-}
-
-// CREDITS PAGE
-// shows credits screen and resets sprite visibility
-function showCredits() {
-  darkBgm.pause();
-  darkBgm.currentTime = 0;
-  if (textboxClickHandler) {
-    textbox.removeEventListener("click", textboxClickHandler);
-    // clean up listener before leaving
-    textboxClickHandler = null;
-  }
-  switchScreen("game-screen", "credits-screen");
-  sprite.style.display = "block";
 }
 
 // 4. ADD EVENT LISTENERS
@@ -416,7 +422,7 @@ document.getElementById("start-button").addEventListener("click", function () {
   bgm.loop = true;
   bgm.volume = 0.1;
 
-  // creepy bg,
+  // creepy bg music
   darkBgm = new Audio("https://file.garden/afccNF_qMXpg-KIC/hatsukoi.mp3");
   darkBgm.loop = true;
   darkBgm.volume = 0.1;
@@ -427,13 +433,13 @@ document.getElementById("start-button").addEventListener("click", function () {
   );
   laughSfx.volume = 0.15;
 
-  // pink buttons's sound
+  // pink buttons sound
   gameSfx = new Audio(
     "https://file.garden/afccNF_qMXpg-KIC/freesound_gamestudio-button-394464.mp3",
   );
   gameSfx.volume = 0.5;
 
-  // not pink buttons's sound
+  // not pink buttons sound
   otherSfx = new Audio(
     "https://file.garden/afccNF_qMXpg-KIC/lucadialessandro-shooting-sound-fx-159024.mp3",
   );
@@ -448,8 +454,10 @@ document.getElementById("start-button").addEventListener("click", function () {
 
 // MAIN MENU BUTTON
 document.getElementById("menu-button").addEventListener("click", function () {
-  otherSfx.currentTime = 0;
-  otherSfx.play();
+  if (otherSfx) {
+    otherSfx.currentTime = 0;
+    otherSfx.play();
+  }
   // play sfx of the button on click action
   switchScreen("credits-screen", "restart-screen");
 });
@@ -458,12 +466,18 @@ document.getElementById("menu-button").addEventListener("click", function () {
 document
   .getElementById("restart-button")
   .addEventListener("click", function () {
-    gameSfx.currentTime = 0;
-    gameSfx.play();
-    darkBgm.pause();
-    darkBgm.currentTime = 0;
-    bgm.currentTime = 0;
-    bgm.play();
+    if (gameSfx) {
+      gameSfx.currentTime = 0;
+      gameSfx.play();
+    }
+    if (darkBgm) {
+      darkBgm.pause();
+      darkBgm.currentTime = 0;
+    }
+    if (bgm) {
+      bgm.currentTime = 0;
+      bgm.play();
+    }
     background.src = "light-bg.png";
     // Reset the background image back to the start state
     switchScreen("restart-screen", "game-screen");
@@ -472,15 +486,19 @@ document
 
 // EXTRA BUTTON
 document.getElementById("extra-button").addEventListener("click", function () {
-  otherSfx.currentTime = 0;
-  otherSfx.play();
+  if (otherSfx) {
+    otherSfx.currentTime = 0;
+    otherSfx.play();
+  }
   document.getElementById("extras-popup").style.display = "flex";
 });
 
 // CLOSE EXTRAS
 document.getElementById("close-extras").addEventListener("click", function () {
-  otherSfx.currentTime = 0;
-  otherSfx.play();
+  if (otherSfx) {
+    otherSfx.currentTime = 0;
+    otherSfx.play();
+  }
   document.getElementById("extras-popup").style.display = "none";
   // display:none so popup disappear when button is clicked
 });
@@ -489,8 +507,10 @@ document.getElementById("close-extras").addEventListener("click", function () {
 document
   .getElementById("credits-button")
   .addEventListener("click", function () {
-    otherSfx.currentTime = 0;
-    otherSfx.play();
+    if (otherSfx) {
+      otherSfx.currentTime = 0;
+      otherSfx.play();
+    }
     switchScreen("restart-screen", "credits-screen");
   });
 
